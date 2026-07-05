@@ -23,6 +23,116 @@ Regola generale:
 
 ---
 
+## [0.4.0] - 2026-07-06
+
+### Aggiunto
+
+* Aggiunta documentazione approvata del blocco Flutter 002 dedicato a login, logout e sessione.
+* Aggiunto design auth/session Flutter approvato in `docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md`.
+* Aggiunto coding plan auth/session Flutter approvato in `docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md`.
+* Aggiunto TODO auth/session Flutter approvato in `docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`.
+* Definito il perimetro operativo del blocco 002:
+
+  * controllo sessione Supabase all'avvio;
+  * login con email e password;
+  * logout;
+  * recupero sessione persistente;
+  * ascolto centrale degli eventi auth Supabase;
+  * lettura profilo applicativo;
+  * lettura azienda collegata al profilo;
+  * gestione utente senza profilo;
+  * gestione utente con profilo e azienda;
+  * placeholder onboarding;
+  * placeholder home;
+  * feedback persistente;
+  * accessibilità minima;
+  * test automatici obbligatori;
+  * test manuali con Supabase reale.
+* Definiti i file di produzione previsti per il blocco auth/session:
+
+  * `app/lib/features/auth/domain/auth_profile_check_result.dart`;
+  * `app/lib/features/auth/data/auth_service.dart`;
+  * `app/lib/features/auth/data/profile_service.dart`;
+  * `app/lib/features/auth/application/auth_session_coordinator.dart`;
+  * `app/lib/features/auth/presentation/session_gate.dart`;
+  * `app/lib/features/auth/presentation/login_page.dart`;
+  * `app/lib/features/auth/presentation/auth_placeholder_page.dart`;
+  * `app/lib/core/feedback/app_feedback_view.dart`.
+* Definito il file eventuale `app/lib/app/app_root.dart`, da creare solo se utile per mantenere pulito `main.dart`.
+* Definiti i file di test automatici obbligatori previsti per il blocco auth/session:
+
+  * `app/test/features/auth/domain/auth_profile_check_result_test.dart`;
+  * `app/test/features/auth/data/profile_service_test.dart`;
+  * `app/test/features/auth/application/auth_session_coordinator_test.dart`;
+  * `app/test/features/auth/presentation/session_gate_test.dart`;
+  * `app/test/features/auth/presentation/login_page_test.dart`;
+  * `app/test/features/auth/presentation/auth_placeholder_page_test.dart`;
+  * `app/test/core/feedback/app_feedback_view_test.dart`.
+* Definita la regola secondo cui il blocco auth/session deve avere un solo punto centrale di gestione della sessione applicativa.
+* Definita la regola secondo cui il listener Supabase Auth deve essere unico e deve stare nel coordinator.
+* Definita la gestione degli eventi auth principali:
+
+  * `initialSession`;
+  * `signedIn`;
+  * `signedOut`;
+  * `tokenRefreshed`.
+* Definita la regola per cui gli eventi auth non previsti devono essere gestiti come no-op esplicito.
+* Definita la regola per cui `tokenRefreshed` deve confrontare l'utente tramite `user.id` e non tramite uguaglianza dell'istanza `User`.
+* Definita la distinzione obbligatoria tra:
+
+  * profilo assente;
+  * profilo incompleto;
+  * profilo completo;
+  * errore tecnico di lettura profilo;
+  * errore tecnico di lettura azienda.
+* Definita la regola per cui un profilo con `azienda_id` presente ma azienda non trovata o non leggibile deve essere trattato come errore tecnico.
+* Definita la regola per cui una query Supabase bloccata silenziosamente dalle RLS e conclusa con `null` tramite `maybeSingle()` non deve essere interpretata automaticamente come profilo incompleto.
+* Definita la regola per cui `azienda_id` presente ma azienda `null` deve generare errore tecnico manuale.
+* Definita la regola per cui `companyName` vuoto o mancante non consente lo stato `complete`.
+* Definita la protezione contro doppi login, doppi logout, doppi retry e race condition tra `currentUser` e `initialSession`.
+* Definita la regola per cui il blocco 002 deve usare i file core già completati senza riscriverli.
+* Definita la regola per cui `LoginPage`, `AuthPlaceholderPage` e `SessionGate` devono ricevere azioni tramite callback esplicite.
+* Definita la gestione minima degli errori dello stream auth: feedback persistente e stato sicuro, senza retry automatici complessi nel blocco 002.
+
+### Modificato
+
+* Aggiornato il todo master Flutter in `docs/4-flutter/3-todos/000-todo-master.md`.
+* Aggiornato il todo master per segnare il blocco 001 Core Dart minimo come completato.
+* Aggiornato il todo master per registrare che il blocco 001 Core Dart minimo è stato codificato, testato, committato, pushato e mergiato in `main`.
+* Aggiornato il todo master per registrare che, dopo il merge del blocco 001, `flutter analyze` e `flutter test` risultano superati su `main`.
+* Aggiornato il todo master per aggiungere i documenti approvati del blocco 002 Auth/Session.
+* Aggiornato il todo master per segnare la macro-fase “Login, logout e sessione” come `[~] In corso`.
+* Aggiornato il todo master per indicare che la documentazione del blocco 002 è completata, mentre la codifica è ancora da fare.
+* Aggiornato il prossimo passo operativo del todo master: preparare il prompt operativo rigido per Antigravity sul blocco 002 Auth/Session.
+* Rafforzata la regola di lavoro Flutter per il blocco 002: design, coding plan, TODO, codice, test automatici, test manuali, changelog, commit e push.
+* Rafforzata la regola di accessibilità permanente per il blocco auth/session.
+* Rafforzata la regola backend fonte della verità: il blocco auth/session non deve chiamare `crea_azienda_e_profilo`, non deve creare profilo, non deve creare azienda e non deve anticipare onboarding reale.
+* Aggiornata la lista dei commit esemplificativi nel todo master con i blocchi auth/session.
+
+### Note
+
+* La preparazione documentale del blocco 002 Auth/Session è completata.
+* Il blocco 002 non implementa ancora codice.
+* Il blocco 002 non implementa onboarding reale.
+* Il blocco 002 non implementa home reale.
+* Il blocco 002 non implementa categorie, fornitori, prodotti, movimenti o storico.
+* Il blocco 002 prepara la porta d'ingresso dell'app:
+
+  * controllo sessione;
+  * login;
+  * logout;
+  * lettura profilo;
+  * lettura azienda;
+  * decisione login / placeholder onboarding / placeholder home.
+* Il prossimo passo tecnico sarà preparare il prompt operativo rigido per Antigravity.
+* La codifica dovrà seguire i documenti approvati:
+
+  * `docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md`;
+  * `docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md`;
+  * `docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`.
+* Il blocco auth/session non potrà essere considerato completato senza `flutter analyze` e `flutter test` entrambi con esito positivo.
+* Prima del commit finale della codifica auth/session dovrà essere aggiornato nuovamente questo changelog con il risultato effettivo dell'implementazione.
+
 ## [0.3.0] - 2026-07-05
 
 ### Aggiunto

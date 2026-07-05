@@ -4,18 +4,14 @@
 
 Versione: 1.0.0
 Stato: APPROVATO
-Data: 5 luglio 2026
-
----
+Data: 6 luglio 2026
+-------------------
 
 # 1. Scopo del documento
 
 Questo documento è il todo master della fase Flutter dell'MVP 1.
-
 Serve a tenere traccia delle macro-fasi di lavoro necessarie per costruire l'app Flutter del Gestionale Magazzino Universale.
-
 Questo file non contiene codice.
-
 Questo file non sostituisce:
 
 * i documenti di design;
@@ -23,17 +19,14 @@ Questo file non sostituisce:
 * i todo specifici;
 * il changelog;
 * i test manuali.
-
-Il suo scopo è rispondere sempre a questa domanda:
-
-**A che punto siamo e qual è il prossimo blocco logico da fare?**
+  Il suo scopo è rispondere sempre a questa domanda:
+  **A che punto siamo e qual è il prossimo blocco logico da fare?**
 
 ---
 
 # 2. Ruolo del todo master
 
 Il todo master è la bussola generale del lavoro Flutter.
-
 Deve aiutare a:
 
 * riprendere il progetto dopo una pausa;
@@ -43,10 +36,8 @@ Deve aiutare a:
 * collegare ogni macro-fase ai suoi documenti specifici;
 * evitare di saltare passaggi importanti;
 * mantenere il lavoro ordinato e verificabile.
-
-Il todo master deve restare semplice.
-
-I dettagli operativi devono stare nei todo specifici.
+  Il todo master deve restare semplice.
+  I dettagli operativi devono stare nei todo specifici.
 
 ---
 
@@ -55,11 +46,8 @@ I dettagli operativi devono stare nei todo specifici.
 ## Todo master
 
 Il file:
-
 `000-todo-master.md`
-
 contiene la visione generale.
-
 Esempio:
 
 * Core Dart minimo;
@@ -76,11 +64,8 @@ Esempio:
 ## Todo specifici
 
 I file specifici, come:
-
 `001-TODO_CORE_mvp1_v1.0.0.md`
-
 contengono i passi piccoli e concreti di una singola fase.
-
 Esempio:
 
 * creare cartella `core/messages`;
@@ -93,11 +78,9 @@ Esempio:
 * eseguire `flutter test`;
 * aggiornare changelog;
 * fare commit.
-
-Regola:
-
-**Il todo master dice dove andare.
-Il todo specifico dice come fare quel pezzo.**
+  Regola:
+  **Il todo master dice dove andare.
+  Il todo specifico dice come fare quel pezzo.**
 
 ---
 
@@ -109,8 +92,7 @@ Per mantenere il file semplice e leggibile anche con screen reader, si usano que
 * `[~]` In corso
 * `[x]` Completato
 * `[!]` Bloccato
-
-Significato:
+  Significato:
 
 ## `[ ]` Da fare
 
@@ -126,9 +108,7 @@ La fase è stata completata, verificata e committata.
 
 ## `[!]` Bloccato
 
-La fase non può proseguire finché non viene risolto un problema.
-
----
+## La fase non può proseguire finché non viene risolto un problema.
 
 # 5. Stato generale del progetto
 
@@ -150,11 +130,22 @@ Alla data di questo documento, il progetto si trova in questa situazione:
 * design core Flutter approvato;
 * coding plan core Flutter approvato;
 * TODO core Flutter approvato;
-* fase Flutter pronta per la codifica del primo blocco.
-
-La preparazione documentale del blocco 001 Core Flutter è completata.
-
-La prossima fase riguarda la codifica del core Dart minimo, seguendo il design core, il coding plan core e il TODO core approvati.
+* blocco 001 Core Dart minimo codificato;
+* blocco 001 Core Dart minimo testato;
+* blocco 001 Core Dart minimo committato;
+* blocco 001 Core Dart minimo pushato;
+* blocco 001 Core Dart minimo mergiato in `main`;
+* dopo il merge del blocco 001, `flutter analyze` passa senza errori;
+* dopo il merge del blocco 001, `flutter test` passa con tutti i test superati;
+* design auth/session Flutter approvato;
+* coding plan auth/session Flutter approvato;
+* TODO auth/session Flutter approvato;
+* preparazione documentale del blocco 002 Auth/Session completata;
+* fase Flutter pronta per la codifica del blocco 002 Login, logout e sessione.
+  La preparazione documentale del blocco 001 Core Flutter è completata.
+  La codifica del blocco 001 Core Dart minimo è completata.
+  La preparazione documentale del blocco 002 Auth/Session è completata.
+  La prossima fase riguarda la codifica del blocco 002 Login, logout e sessione, seguendo il design auth/session, il coding plan auth/session e il TODO auth/session approvati.
 
 ---
 
@@ -163,21 +154,15 @@ La prossima fase riguarda la codifica del core Dart minimo, seguendo il design c
 ## Architettura
 
 Documento:
-
 `docs/0-architettura/001-ARCHITETTURA_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## Database schema
 
 Documento:
-
 `docs/1-database/001-DATABASE_SCHEMA_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## Script Supabase
@@ -188,106 +173,95 @@ Documenti:
 * `docs/1-database/supabase/002_rpc.sql`
 * `docs/1-database/supabase/003_rls.sql`
 * `docs/1-database/supabase/004_onboarding_rpc.sql`
-
-Stato:
-
-`APPROVATI ED ESEGUITI`
+  Stato:
+  `APPROVATI ED ESEGUITI`
 
 ## Test backend
 
 Documento:
-
 `docs/1-database/TEST_PLAN_MVP1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
-
 Esito:
-
 `TEST BACKEND SUPERATI`
 
 ## Flussi applicativi
 
 Documento:
-
 `docs/2-flussi-applicativi/001-FLOWS_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## Backend rules
 
 Documento:
-
 `docs/3-backend/001-BACKEND_RULES_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## API Contracts
 
 Documento:
-
 `docs/3-backend/002-API_CONTRACTS_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## Flutter plan
 
 Documento:
-
 `docs/4-flutter/001-FLUTTER_PLAN_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## README documentazione
 
 Documento:
-
 `docs/README.md`
-
 Stato:
-
 `APPROVATO`
 
 ## Design core Flutter
 
 Documento:
-
 `docs/4-flutter/1-design/001-DESIGN_CORE_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## Coding plan core Flutter
 
 Documento:
-
 `docs/4-flutter/2-coding-plans/001-CODING_PLAN_CORE_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
 ## TODO core Flutter
 
 Documento:
-
 `docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md`
-
 Stato:
-
 `APPROVATO`
 
----
+## Design auth/session Flutter
+
+Documento:
+`docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md`
+Stato:
+`APPROVATO`
+
+## Coding plan auth/session Flutter
+
+Documento:
+`docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md`
+Stato:
+`APPROVATO`
+
+## TODO auth/session Flutter
+
+Documento:
+`docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`
+Stato:
+`APPROVATO`
+-----------
 
 # 7. Regola di lavoro per la fase Flutter
 
@@ -303,12 +277,9 @@ Ogni blocco Flutter importante deve seguire questo ordine:
 8. aggiornamento changelog;
 9. commit;
 10. push.
-
-Questa regola evita di scrivere codice senza una direzione chiara.
-
-Per il blocco 001 Core Flutter, i test automatici sono obbligatori.
-
-Il blocco core non può essere considerato completato senza:
+    Questa regola evita di scrivere codice senza una direzione chiara.
+    Per il blocco 001 Core Flutter, i test automatici sono obbligatori.
+    Il blocco core non può essere considerato completato senza:
 
 ```text
 flutter analyze
@@ -316,6 +287,25 @@ flutter test
 ```
 
 entrambi con esito positivo.
+Per il blocco 002 Auth/Session, i test automatici sono obbligatori.
+Il blocco auth/session non potrà essere considerato completato senza:
+
+```text
+flutter analyze
+flutter test
+```
+
+entrambi con esito positivo.
+Il blocco 002 dovrà inoltre prevedere test manuali con Supabase reale per:
+
+* login;
+* logout;
+* recupero sessione;
+* utente senza profilo;
+* utente con profilo e azienda;
+* gestione errore profilo;
+* retry;
+* verifica accessibilità minima con screen reader.
 
 ---
 
@@ -324,32 +314,22 @@ entrambi con esito positivo.
 ## 8.1 Preparazione operativa Flutter
 
 Stato:
-
 `[x] Completato`
-
 Obiettivo:
-
 preparare i documenti operativi necessari prima di scrivere il core Dart minimo.
-
 Documenti collegati:
 
 * `docs/4-flutter/3-todos/000-todo-master.md`
-
-Documenti completati:
-
+  Documenti completati:
 * `docs/4-flutter/1-design/001-DESIGN_CORE_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/001-CODING_PLAN_CORE_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
-questa fase è completata quando esistono e sono approvati:
-
+  Criterio di completamento:
+  questa fase è completata quando esistono e sono approvati:
 * design core;
 * coding plan core;
 * todo core.
-
-Esito:
+  Esito:
 
 ```text
 COMPLETATO
@@ -367,13 +347,9 @@ Note:
 ## 8.2 Core Dart minimo
 
 Stato:
-
 `[x] Completato`
-
 Obiettivo:
-
 creare la base comune dell'app Flutter prima delle schermate complete.
-
 Il core dovrà contenere, in forma minima:
 
 * messaggi centralizzati;
@@ -385,15 +361,11 @@ Il core dovrà contenere, in forma minima:
 * gestione sessione minima;
 * controller sessione minimo;
 * test automatici obbligatori.
-
-Documenti approvati:
-
+  Documenti approvati:
 * `docs/4-flutter/1-design/001-DESIGN_CORE_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/001-CODING_PLAN_CORE_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * cartelle core create;
 * otto file core di produzione creati;
 * quattro file di test automatici obbligatori creati;
@@ -414,9 +386,10 @@ Criterio di completamento:
 * `flutter test` con esito positivo;
 * changelog aggiornato;
 * commit eseguito;
-* push eseguito.
-
-File di produzione previsti:
+* push eseguito;
+* merge in `main` eseguito;
+* verifica su `main` eseguita.
+  File di produzione previsti:
 
 ```text
 lib/core/messages/app_messages.dart
@@ -438,18 +411,30 @@ test/core/session/app_session_controller_test.dart
 test/core/accessibility/accessibility_service_test.dart
 ```
 
+Esito:
+
+```text
+COMPLETATO
+```
+
+Note:
+
+* blocco core codificato;
+* test automatici superati;
+* `flutter analyze` superato;
+* commit eseguito;
+* push eseguito;
+* merge in `main` eseguito;
+* dopo merge su `main`, `flutter analyze` e `flutter test` risultano superati.
+
 ---
 
 ## 8.3 Login, logout e sessione
 
 Stato:
-
-`[ ] Da fare`
-
+`[~] In corso`
 Obiettivo:
-
 gestire l'accesso dell'utente e lo stato iniziale dell'app.
-
 Funzionalità previste:
 
 * login con email e password;
@@ -458,37 +443,106 @@ Funzionalità previste:
 * gestione utente non autenticato;
 * gestione utente autenticato senza profilo;
 * gestione utente autenticato con profilo;
+* controllo profilo applicativo;
+* controllo azienda collegata al profilo;
+* gestione utente con profilo assente;
+* gestione utente con profilo incompleto;
+* gestione azienda non leggibile o non trovata;
+* gestione sessione persistente;
+* gestione eventi auth Supabase;
+* gestione `tokenRefreshed`;
+* gestione eventi auth non previsti come no-op esplicito;
+* protezione da doppi login, doppi logout e doppi retry;
+* feedback persistente;
 * messaggi accessibili di successo ed errore.
-
-Documenti previsti:
-
+  Documenti approvati:
 * `docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`
+  Documentazione:
+
+```text
+COMPLETATA
+```
+
+Codifica:
+
+```text
+DA FARE
+```
 
 Criterio di completamento:
 
 * login funzionante;
 * logout funzionante;
 * sessione letta all'avvio;
+* sessione persistente recuperata correttamente;
+* eventi auth gestiti in un solo punto centrale;
+* nessun listener auth duplicato;
 * errori login tradotti in messaggi comprensibili;
 * feedback persistente presente;
 * schermata corretta mostrata in base allo stato utente;
-* test manuali login superati;
-* commit eseguito.
+* utente senza profilo portato a placeholder onboarding;
+* utente con profilo e azienda portato a placeholder home;
+* errore lettura profilo non confuso con profilo assente;
+* azienda non leggibile non confusa con profilo incompleto;
+* RLS silenti gestite correttamente quando `maybeSingle()` restituisce `null`;
+* `tokenRefreshed` gestito tramite confronto `user.id`;
+* eventi auth non previsti gestiti come no-op esplicito;
+* `AuthPlaceholderPage` coperta da test;
+* test automatici del blocco superati;
+* test manuali login/sessione superati;
+* verifica accessibilità minima eseguita;
+* `flutter analyze` senza errori;
+* `flutter test` con esito positivo;
+* changelog aggiornato;
+* commit eseguito;
+* push eseguito.
+  File di produzione previsti:
+
+```text
+app/lib/features/auth/domain/auth_profile_check_result.dart
+app/lib/features/auth/data/auth_service.dart
+app/lib/features/auth/data/profile_service.dart
+app/lib/features/auth/application/auth_session_coordinator.dart
+app/lib/features/auth/presentation/session_gate.dart
+app/lib/features/auth/presentation/login_page.dart
+app/lib/features/auth/presentation/auth_placeholder_page.dart
+app/lib/core/feedback/app_feedback_view.dart
+```
+
+File eventuale:
+
+```text
+app/lib/app/app_root.dart
+```
+
+File di test obbligatori previsti:
+
+```text
+app/test/features/auth/domain/auth_profile_check_result_test.dart
+app/test/features/auth/data/profile_service_test.dart
+app/test/features/auth/application/auth_session_coordinator_test.dart
+app/test/features/auth/presentation/session_gate_test.dart
+app/test/features/auth/presentation/login_page_test.dart
+app/test/features/auth/presentation/auth_placeholder_page_test.dart
+app/test/core/feedback/app_feedback_view_test.dart
+```
+
+Prossimo passo della macro-fase:
+
+```text
+preparare il prompt operativo rigido per Antigravity e poi codificare il blocco 002
+```
 
 ---
 
 ## 8.4 Onboarding
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 permettere a un utente autenticato senza profilo di creare azienda e profilo.
-
 Funzionalità previste:
 
 * rilevamento profilo assente;
@@ -498,15 +552,11 @@ Funzionalità previste:
 * chiamata RPC `crea_azienda_e_profilo`;
 * gestione onboarding duplicato;
 * passaggio alla home dopo onboarding riuscito.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/003-DESIGN_ONBOARDING_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/003-CODING_PLAN_ONBOARDING_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/003-TODO_ONBOARDING_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * onboarding funzionante;
 * azienda creata;
 * profilo creato;
@@ -520,13 +570,9 @@ Criterio di completamento:
 ## 8.5 Home
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 creare la schermata iniziale dopo login e onboarding.
-
 Funzionalità previste:
 
 * mostrare nome azienda;
@@ -537,15 +583,11 @@ Funzionalità previste:
 * accesso a prodotti;
 * accesso a movimenti;
 * logout raggiungibile.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/004-DESIGN_HOME_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/004-CODING_PLAN_HOME_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/004-TODO_HOME_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * home leggibile;
 * navigazione principale funzionante;
 * elementi letti correttamente da screen reader;
@@ -557,13 +599,9 @@ Criterio di completamento:
 ## 8.6 Categorie
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 gestire le categorie prodotto.
-
 Funzionalità previste:
 
 * lista categorie;
@@ -573,15 +611,11 @@ Funzionalità previste:
 * gestione nome obbligatorio;
 * gestione nome duplicato;
 * visualizzazione stato attiva/inattiva.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/005-DESIGN_CATEGORIES_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/005-CODING_PLAN_CATEGORIES_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/005-TODO_CATEGORIES_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * lista categorie funzionante;
 * creazione funzionante;
 * modifica funzionante;
@@ -595,13 +629,9 @@ Criterio di completamento:
 ## 8.7 Fornitori
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 gestire l'anagrafica fornitori.
-
 Funzionalità previste:
 
 * lista fornitori;
@@ -612,15 +642,11 @@ Funzionalità previste:
 * gestione nome duplicato;
 * gestione campi facoltativi;
 * visualizzazione stato attivo/inattivo.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/006-DESIGN_SUPPLIERS_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/006-CODING_PLAN_SUPPLIERS_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/006-TODO_SUPPLIERS_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * lista fornitori funzionante;
 * creazione funzionante;
 * modifica funzionante;
@@ -634,13 +660,9 @@ Criterio di completamento:
 ## 8.8 Prodotti
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 gestire l'anagrafica prodotti.
-
 Funzionalità previste:
 
 * lista prodotti;
@@ -655,15 +677,11 @@ Funzionalità previste:
 * gestione scorta minima;
 * visualizzazione scorta attuale;
 * blocco modifica diretta scorta.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/007-DESIGN_PRODUCTS_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/007-CODING_PLAN_PRODUCTS_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/007-TODO_PRODUCTS_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * lista prodotti funzionante;
 * dettaglio prodotto funzionante;
 * creazione funzionante;
@@ -680,13 +698,9 @@ Criterio di completamento:
 ## 8.9 Movimenti di magazzino
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 registrare le variazioni di scorta tramite RPC.
-
 Funzionalità previste:
 
 * carico;
@@ -698,15 +712,11 @@ Funzionalità previste:
 * gestione scorta insufficiente;
 * gestione scorta minima;
 * motivazione obbligatoria per rettifica.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/008-DESIGN_MOVEMENTS_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/008-CODING_PLAN_MOVEMENTS_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/008-TODO_MOVEMENTS_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * carico funzionante;
 * vendita funzionante;
 * rettifica funzionante;
@@ -722,13 +732,9 @@ Criterio di completamento:
 ## 8.10 Storico movimenti
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 consultare lo storico dei movimenti di magazzino.
-
 Funzionalità previste:
 
 * lista movimenti;
@@ -740,17 +746,12 @@ Funzionalità previste:
 * visualizzazione scorta dopo;
 * visualizzazione note;
 * visualizzazione fornitore nei carichi.
-
-Per l'MVP 1 il nome operatore non viene mostrato in forma amichevole.
-
-Documenti previsti:
-
+  Per l'MVP 1 il nome operatore non viene mostrato in forma amichevole.
+  Documenti previsti:
 * `docs/4-flutter/1-design/009-DESIGN_MOVEMENT_HISTORY_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/009-CODING_PLAN_MOVEMENT_HISTORY_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/009-TODO_MOVEMENT_HISTORY_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * storico leggibile;
 * filtri principali funzionanti;
 * movimenti ordinati correttamente;
@@ -762,13 +763,9 @@ Criterio di completamento:
 ## 8.11 Revisione accessibilità
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 verificare che il flusso principale sia utilizzabile tramite screen reader.
-
 Controlli previsti:
 
 * login;
@@ -785,15 +782,11 @@ Controlli previsti:
 * ordine del focus;
 * chiarezza dei pulsanti;
 * assenza di informazioni solo visive.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/010-DESIGN_ACCESSIBILITY_REVIEW_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/010-CODING_PLAN_ACCESSIBILITY_REVIEW_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/010-TODO_ACCESSIBILITY_REVIEW_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * flusso principale usabile con screen reader;
 * errori principali leggibili;
 * messaggi persistenti funzionanti;
@@ -805,13 +798,9 @@ Criterio di completamento:
 ## 8.12 Stabilizzazione MVP 1
 
 Stato:
-
 `[ ] Da fare`
-
 Obiettivo:
-
 stabilizzare l'app prima di considerare chiuso l'MVP 1.
-
 Attività previste:
 
 * revisione bug;
@@ -822,15 +811,11 @@ Attività previste:
 * test manuale completo;
 * verifica repository;
 * preparazione eventuale tag di versione.
-
-Documenti previsti:
-
+  Documenti previsti:
 * `docs/4-flutter/1-design/011-DESIGN_STABILIZATION_mvp1_v1.0.0.md`
 * `docs/4-flutter/2-coding-plans/011-CODING_PLAN_STABILIZATION_mvp1_v1.0.0.md`
 * `docs/4-flutter/3-todos/011-TODO_STABILIZATION_mvp1_v1.0.0.md`
-
-Criterio di completamento:
-
+  Criterio di completamento:
 * flusso MVP 1 completo;
 * test principali superati;
 * documentazione aggiornata;
@@ -846,7 +831,7 @@ Stato attuale:
 
 * `[x]` Preparazione operativa Flutter
 * `[x]` Core Dart minimo
-* `[ ]` Login, logout e sessione
+* `[~]` Login, logout e sessione
 * `[ ]` Onboarding
 * `[ ]` Home
 * `[ ]` Categorie
@@ -862,21 +847,21 @@ Stato attuale:
 # 10. Prossimo passo operativo
 
 Il prossimo passo è codificare il blocco:
-
-`Core Dart minimo`
-
+`Login, logout e sessione`
 seguendo i documenti approvati:
 
-* `docs/4-flutter/1-design/001-DESIGN_CORE_mvp1_v1.0.0.md`
-* `docs/4-flutter/2-coding-plans/001-CODING_PLAN_CORE_mvp1_v1.0.0.md`
-* `docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md`
-
-La codifica dovrà creare:
-
-* otto file di produzione;
-* quattro file di test obbligatori.
-
-Il blocco non sarà completato senza:
+* `docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md`
+* `docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md`
+* `docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`
+  Prima della codifica deve essere preparato il prompt operativo rigido per Antigravity.
+  La codifica dovrà creare:
+* i file di produzione previsti dal TODO auth/session;
+* i file di test automatici obbligatori previsti dal TODO auth/session;
+* il widget feedback persistente;
+* la schermata login minima;
+* i placeholder onboarding e home;
+* il coordinator centrale auth/session.
+  Il blocco non sarà completato senza:
 
 ```text
 flutter analyze
@@ -884,8 +869,15 @@ flutter test
 ```
 
 entrambi con esito positivo.
+Non si devono ancora creare:
 
-Non si devono ancora creare schermate complete.
+* onboarding reale;
+* home reale;
+* categorie;
+* fornitori;
+* prodotti;
+* movimenti;
+* storico movimenti.
 
 ---
 
@@ -917,21 +909,19 @@ Questo file non deve contenere:
 * prompt per coding agent;
 * bozze di schermate;
 * dettagli tecnici che appartengono ai coding plan.
-
-Questi contenuti devono stare nei documenti specifici.
+  Questi contenuti devono stare nei documenti specifici.
 
 ---
 
 # 13. Regole per i todo specifici
 
 Ogni todo specifico deve essere collegato a una sola macro-fase.
-
 Esempio:
-
 `001-TODO_CORE_mvp1_v1.0.0.md`
-
 deve riguardare solo il core Dart minimo.
-
+Esempio:
+`002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`
+deve riguardare solo login, logout e sessione.
 Un todo specifico deve contenere:
 
 * obiettivo del blocco;
@@ -943,28 +933,21 @@ Un todo specifico deve contenere:
 * test manuali, quando previsti;
 * criterio di completamento;
 * commit consigliato.
-
-Un todo specifico non deve mischiare fasi diverse.
-
-Esempio da evitare:
-
+  Un todo specifico non deve mischiare fasi diverse.
+  Esempio da evitare:
 * core;
 * login;
 * onboarding;
 * prodotti;
-
-tutti nello stesso todo.
+  tutti nello stesso todo.
 
 ---
 
 # 14. Regola dei piccoli passi
 
 Il progetto deve procedere con piccoli blocchi.
-
 Regola:
-
 **un blocco, un obiettivo, un test, un commit.**
-
 Questo significa:
 
 1. scrivere il design del blocco;
@@ -974,15 +957,13 @@ Questo significa:
 5. testare;
 6. correggere;
 7. committare.
-
-Questa regola serve a evitare confusione e regressioni.
+   Questa regola serve a evitare confusione e regressioni.
 
 ---
 
 # 15. Regola sui commit
 
 Ogni blocco completato deve avere un commit chiaro.
-
 Esempi:
 
 * `Aggiunge todo master Flutter`
@@ -990,13 +971,14 @@ Esempi:
 * `Aggiunge coding plan core Flutter`
 * `Aggiunge TODO core Flutter`
 * `Aggiunge core Dart minimo`
+* `Aggiunge design auth session Flutter`
+* `Aggiunge coding plan auth session Flutter`
+* `Aggiunge TODO auth session Flutter`
+* `Aggiunge login logout e gestione sessione`
 * `Aggiunge gestione feedback applicativo`
 * `Aggiunge gestione sessione iniziale`
-
-Il commit deve descrivere cosa è stato fatto, non essere generico.
-
-Da evitare:
-
+  Il commit deve descrivere cosa è stato fatto, non essere generico.
+  Da evitare:
 * `modifiche`
 * `fix`
 * `varie`
@@ -1007,21 +989,22 @@ Da evitare:
 # 16. Regola sul changelog
 
 Quando viene completato un blocco importante, aggiornare:
-
 `CHANGELOG.md`
-
 Il changelog deve raccontare l'evoluzione del progetto.
-
 Il todo master dice cosa resta da fare.
-
 Il changelog dice cosa è stato fatto.
+Per il blocco 002, il changelog deve essere aggiornato prima del commit finale della codifica auth/session.
+Il changelog deve distinguere:
+
+* completamento documentale del blocco auth/session;
+* completamento della codifica auth/session;
+* eventuali correzioni successive.
 
 ---
 
 # 17. Regola sui consiglieri AI
 
 Questo todo master non richiede revisione esterna con consiglieri AI perché non introduce nuove decisioni tecniche.
-
 La revisione con consiglieri AI è consigliata per:
 
 * design complessi;
@@ -1031,9 +1014,7 @@ La revisione con consiglieri AI è consigliata per:
 * modifiche RLS;
 * modifiche alla logica di scorta;
 * scelte architetturali importanti.
-
-La revisione non è normalmente necessaria per:
-
+  La revisione non è normalmente necessaria per:
 * todo master;
 * README;
 * changelog;
@@ -1045,7 +1026,6 @@ La revisione non è normalmente necessaria per:
 # 18. Regola di accessibilità permanente
 
 L'accessibilità non è una fase finale separata.
-
 Ogni macro-fase deve rispettare fin dall'inizio questi principi:
 
 * messaggi testuali;
@@ -1056,17 +1036,14 @@ Ogni macro-fase deve rispettare fin dall'inizio questi principi:
 * nessuna informazione solo visiva;
 * nessun errore comunicato solo tramite colore;
 * compatibilità con screen reader.
-
-La revisione accessibilità finale serve a verificare il risultato complessivo, non a introdurre l'accessibilità per la prima volta.
+  La revisione accessibilità finale serve a verificare il risultato complessivo, non a introdurre l'accessibilità per la prima volta.
 
 ---
 
 # 19. Regola backend fonte della verità
 
 Durante tutta la fase Flutter resta valida questa regola:
-
 **il backend è la fonte della verità.**
-
 Flutter non deve:
 
 * modificare direttamente `prodotti.scorta_attuale`;
@@ -1076,57 +1053,66 @@ Flutter non deve:
 * usare service role key;
 * bypassare le RLS;
 * fidarsi dei dati locali come se fossero definitivi.
-
-Flutter deve:
-
+  Flutter deve:
 * usare `crea_azienda_e_profilo` per onboarding;
 * usare `registra_movimento` per carico, vendita, reso e rettifica;
 * leggere i dati consentiti dalle RLS;
 * tradurre gli errori tecnici in messaggi comprensibili;
 * mostrare feedback persistente.
+  Nel blocco 002 Auth/Session, Flutter non deve ancora chiamare:
+
+```text
+crea_azienda_e_profilo
+```
+
+Questa RPC appartiene al blocco onboarding.
+Nel blocco 002 Auth/Session, Flutter deve solo:
+
+* autenticare l'utente;
+* leggere il profilo;
+* leggere l'azienda collegata;
+* decidere se mostrare login, placeholder onboarding o placeholder home.
 
 ---
 
 # 20. Stato del documento
 
 Stato:
-
 `APPROVATO`
-
 Versione:
-
 `1.0.0`
-
 Nome file:
-
 `docs/4-flutter/3-todos/000-todo-master.md`
-
 Prossimo passo:
-
-`Codifica del core Dart minimo`
-
+`Preparare il prompt operativo rigido per Antigravity sul blocco 002 Auth/Session`
 Documenti guida:
 
-* `docs/4-flutter/1-design/001-DESIGN_CORE_mvp1_v1.0.0.md`
-* `docs/4-flutter/2-coding-plans/001-CODING_PLAN_CORE_mvp1_v1.0.0.md`
-* `docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md`
+* `docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md`
+* `docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md`
+* `docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md`
 
 ---
 
 # 21. Conclusione
 
 Questo todo master definisce la mappa generale della fase Flutter dell'MVP 1.
-
 Il documento non deve diventare un elenco enorme di dettagli.
-
 Deve restare una bussola.
-
 I dettagli saranno scritti nei design, nei coding plan e nei todo specifici.
-
 La preparazione documentale del core Dart minimo è completata.
+La codifica del core Dart minimo è completata.
+La preparazione documentale del blocco Login, logout e sessione è completata.
+Il prossimo passo è preparare il prompt operativo rigido per Antigravity e poi codificare il blocco 002 Auth/Session seguendo i documenti approvati.
+Il blocco 002 non dovrà creare onboarding reale, home reale o funzionalità gestionali.
+Dovrà creare la porta d'ingresso dell'app:
 
-Il prossimo passo è codificare il core Dart minimo seguendo i documenti approvati.
-
-Il primo blocco di codice non dovrà creare schermate complete.
-
-Dovrà creare la base ordinata su cui costruire il resto dell'app, insieme ai test automatici obbligatori.
+* controllo sessione;
+* login;
+* logout;
+* lettura profilo;
+* lettura azienda;
+* placeholder onboarding;
+* placeholder home;
+* feedback persistente;
+* test automatici obbligatori;
+* test manuali principali.
