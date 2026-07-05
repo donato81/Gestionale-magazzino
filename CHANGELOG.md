@@ -23,6 +23,24 @@ Regola generale:
 
 ---
 
+## [0.3.0] - 2026-07-05
+
+### Aggiunto
+
+* Aggiunto core Dart minimo con messaggi centralizzati, errori applicativi, mapper errori Supabase, feedback, accessibilità e sessione iniziale.
+* Aggiunti test automatici obbligatori per mapper errori, feedback controller, session controller e accessibility service.
+
+### Modificato
+
+* Aggiornata inizializzazione Supabase usando `publishableKey` al posto di `anonKey`.
+* Puliti avvisi di analisi relativi a interpolazioni stringa non necessarie nel servizio provvisorio di test backend.
+
+### Note
+
+* Il blocco core non introduce schermate complete.
+* Il blocco core non implementa login, onboarding, prodotti o movimenti.
+* Il blocco core è completabile solo con `flutter analyze` e `flutter test` entrambi con esito positivo.
+
 ## [0.2.0] - 2026-07-05
 
 ### Aggiunto

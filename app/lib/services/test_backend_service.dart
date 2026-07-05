@@ -471,7 +471,7 @@ class TestBackendService {
           'azienda_id': aziendaId,
           'nome': 'TEST 024 FORNITORE DA NON CANCELLARE $codiceTest',
           'telefono': '0000000000',
-          'email': 'test024${codiceTest}@test.it',
+          'email': 'test024$codiceTest@test.it',
           'note': 'Fornitore temporaneo per test cancellazione',
         })
         .select('id, nome')
@@ -532,7 +532,7 @@ class TestBackendService {
         .from('categorie')
         .insert({
           'azienda_id': aziendaId,
-          'nome': 'TEST 025 CATEGORIA TEMP ${codiceTest}',
+          'nome': 'TEST 025 CATEGORIA TEMP $codiceTest',
           'descrizione': 'Categoria temporanea per test cancellazione prodotto',
         })
         .select('id, nome')
@@ -544,16 +544,16 @@ class TestBackendService {
         .from('fornitori')
         .insert({
           'azienda_id': aziendaId,
-          'nome': 'TEST 025 FORNITORE TEMP ${codiceTest}',
+          'nome': 'TEST 025 FORNITORE TEMP $codiceTest',
           'telefono': '0000000000',
-          'email': 'test025${codiceTest}@test.it',
+          'email': 'test025$codiceTest@test.it',
           'note': 'Fornitore temporaneo per test cancellazione prodotto',
         })
         .select('id, nome')
         .single();
 
     final fornitoreId = fornitoreCreato['id'] as String;
-    final barcodeTest = 'TEST-025-${codiceTest}';
+    final barcodeTest = 'TEST-025-$codiceTest';
 
     final prodottoCreato = await supabase
         .from('prodotti')
@@ -587,7 +587,7 @@ class TestBackendService {
       await supabase.from('categorie').insert({
         'azienda_id': aziendaId,
         'nome': 'TEST 025 PASS CANCELLAZIONE PRODOTTO',
-        'descrizione': 'Cancellazione prodotto bloccata correttamente: ${e}',
+        'descrizione': 'Cancellazione prodotto bloccata correttamente: $e',
       });
 
       return 'PASS: cancellazione prodotto bloccata correttamente.';
@@ -616,7 +616,7 @@ class TestBackendService {
     });
 
     throw Exception(
-      'FAIL: il prodotto è stato cancellato. deleteResult=${deleteResult}',
+      'FAIL: il prodotto è stato cancellato. deleteResult=$deleteResult',
     );
   }
 }
