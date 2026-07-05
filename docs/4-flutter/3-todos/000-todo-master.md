@@ -368,7 +368,7 @@ Note:
 
 Stato:
 
-`[~] In corso`
+`[x] Completato`
 
 Obiettivo:
 
@@ -845,7 +845,7 @@ Criterio di completamento:
 Stato attuale:
 
 * `[x]` Preparazione operativa Flutter
-* `[~]` Core Dart minimo
+* `[x]` Core Dart minimo
 * `[ ]` Login, logout e sessione
 * `[ ]` Onboarding
 * `[ ]` Home
