@@ -44,4 +44,19 @@ class AppMessages {
 
   // Warning Messages
   static const String stockBelowMinimum = 'Attenzione: scorta inferiore al livello minimo.';
+
+  // Auth/Session Block 002 Messages
+  static const String checkingSession = 'Controllo sessione in corso.';
+  static const String login = 'Login';
+  static const String signIn = 'Accedi';
+  static const String signOut = 'Esci';
+  static const String email = 'Email';
+  static const String password = 'Password';
+  static const String profileNotCreatedYet = 'Profilo non ancora creato.';
+  static const String onboardingWillBeImplemented = 'Il flusso onboarding sarà implementato nel blocco successivo.';
+  static const String loginCompleted = 'Accesso completato.';
+  static const String homeWillBeImplemented = 'La home sarà implementata nel blocco 004.';
+  static const String retry = 'Riprova';
+  static const String retryCheckingSession = 'Riprova controllo sessione';
+  static const String retryLoadingProfile = 'Riprova caricamento profilo';
 }

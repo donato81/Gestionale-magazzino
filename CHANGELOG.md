@@ -23,6 +23,28 @@ Regola generale:
 
 ---
 
+## [0.5.0] - 2026-07-06
+
+### Aggiunto
+
+* Implementata la codifica del blocco 002 Auth/Session.
+* Creata la logica di controllo della sessione Supabase all'avvio e del recupero della sessione persistente.
+* Creata la classe `AuthProfileCheckResult` per rappresentare gli stati di verifica del profilo applicativo e dell'azienda.
+* Creato `AuthService` e `SupabaseAuthService` per incapsulare le chiamate di login e logout di Supabase Auth.
+* Creato `ProfileService` e `SupabaseProfileService` per verificare l'esistenza del profilo utente e la leggibilità dell'azienda associata.
+* Creato `AuthSessionCoordinator` per centralizzare la gestione della sessione, gestire race condition, doppi invii e deduplicazione degli eventi auth.
+* Creato il widget `AppFeedbackView` per mostrare in UI feedback persistenti e accessibili.
+* Creato il widget `SessionGate` per osservare lo stato della sessione applicativa e del feedback, e caricare la schermata corretta.
+* Creata la pagina `LoginPage` per l'accesso utente tramite email e password, comprensiva di validazioni dei campi e feedback di caricamento.
+* Creata la pagina `AuthPlaceholderPage` per gestire in modo temporaneo e minimale le schermate di onboarding e home.
+* Creato il widget `AppRoot` per contenere il `MaterialApp` principale in modo da mantenere pulito `main.dart`.
+* Aggiunti test unitari completi e integrati per tutti i moduli logici e widget del blocco 002.
+
+### Modificato
+
+* Aggiornato `main.dart` per inizializzare il flusso corretto con il coordinator auth e caricare `AppRoot`.
+* Aggiornato `app_messages.dart` con i messaggi mancanti necessari al blocco 002.
+
 ## [0.4.0] - 2026-07-06
 
 ### Aggiunto
