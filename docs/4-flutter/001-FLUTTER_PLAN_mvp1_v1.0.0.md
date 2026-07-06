@@ -4,18 +4,14 @@
 
 Versione: 1.0.0
 Stato: APPROVATO
-Data: 4 luglio 2026
-
----
+Data: 6 luglio 2026
+-------------------
 
 # 1. Scopo del documento
 
-Questo documento definisce il piano ufficiale di avvio della fase Flutter per l'MVP 1 del progetto Gestionale Magazzino Universale.
-
+Questo documento definisce il piano ufficiale della fase Flutter per l'MVP 1 del progetto Gestionale Magazzino Universale.
 La fase backend Supabase è già stata progettata, implementata e validata tramite test.
-
-Lo scopo di questo documento è stabilire come iniziare lo sviluppo Flutter in modo ordinato, accessibile e coerente con le regole già approvate.
-
+Lo scopo di questo documento è stabilire come sviluppare l'app Flutter in modo ordinato, accessibile e coerente con le regole già approvate.
 Il documento definisce:
 
 * obiettivo della fase Flutter;
@@ -26,39 +22,54 @@ Il documento definisce:
 * regole per accessibilità e screen reader;
 * regole di collegamento a Supabase;
 * gestione sessione e stato iniziale dell'app;
+* registrazione account;
+* onboarding azienda/profilo;
 * gestione semplice della navigazione;
 * gestione degli errori di rete;
 * test manuali minimi per ogni blocco.
-
-Questo documento non contiene ancora codice Dart definitivo.
-
-Serve come guida prima dell'implementazione.
+  Questo documento non contiene codice Dart definitivo.
+  Serve come guida prima dell'implementazione dei singoli blocchi.
 
 ---
 
 # 2. Stato di partenza
 
 Il progetto ha già completato la fase backend MVP 1.0.
-
 Sono già stati approvati:
 
 * documento architettura MVP 1.0;
 * documento schema database MVP 1.0;
 * documento flussi applicativi MVP 1.0;
 * documento regole backend MVP 1.0;
+* API Contracts MVP 1.0;
 * script SQL Supabase;
-* piano test backend.
-
-Sono già stati eseguiti su Supabase:
-
+* piano test backend;
+* piano Flutter MVP 1.0;
+* todo master Flutter;
+* design, coding plan e TODO del blocco 001 Core Dart minimo;
+* design, coding plan e TODO del blocco 002 Auth/Session.
+  Sono già stati eseguiti su Supabase:
 * `001_schema.sql`;
 * `002_rpc.sql`;
 * `003_rls.sql`;
 * `004_onboarding_rpc.sql`.
+  Il backend è stato validato tramite test.
+  Il blocco 001 Core Dart minimo è stato codificato, testato, committato, pushato e mergiato in `main`.
+  Il blocco 002 Login, logout e sessione è stato codificato, testato, corretto per accessibilità NVDA, committato, pushato e mergiato in `main`.
+  Dopo il merge del blocco 002:
 
-Il backend è stato validato tramite test.
+```text
+flutter analyze
+flutter test
+```
 
-La fase Flutter può quindi iniziare senza riprogettare il database di base.
+risultano puliti su `main`.
+La fase successiva non è più onboarding diretto.
+La prossima fase è la progettazione del blocco 003:
+
+```text
+Registrazione account
+```
 
 ---
 
@@ -66,21 +77,21 @@ La fase Flutter può quindi iniziare senza riprogettare il database di base.
 
 L'obiettivo della fase Flutter è costruire una prima applicazione utilizzabile che permetta a un utente di:
 
-1. accedere con email e password;
-2. uscire dall'app tramite logout;
-3. completare l'onboarding iniziale se non ha ancora un profilo;
-4. visualizzare la home aziendale;
-5. gestire categorie;
-6. gestire fornitori;
-7. gestire prodotti;
-8. registrare movimenti di magazzino;
-9. visualizzare la scorta aggiornata;
-10. consultare lo storico dei movimenti;
-11. usare l'app tramite screen reader.
-
-L'obiettivo non è costruire subito un'app completa e rifinita.
-
-L'obiettivo è costruire un MVP solido, ordinato, accessibile e coerente con il backend già validato.
+1. registrare un nuovo account dall'app;
+2. accedere con email e password;
+3. uscire dall'app tramite logout;
+4. completare l'onboarding iniziale se non ha ancora un profilo;
+5. creare azienda e profilo applicativo tramite flusso guidato;
+6. visualizzare la home aziendale;
+7. gestire categorie;
+8. gestire fornitori;
+9. gestire prodotti;
+10. registrare movimenti di magazzino;
+11. visualizzare la scorta aggiornata;
+12. consultare lo storico dei movimenti;
+13. usare l'app tramite screen reader.
+    L'obiettivo non è costruire subito un'app completa e rifinita.
+    L'obiettivo è costruire un MVP solido, ordinato, accessibile e coerente con il backend già validato.
 
 ---
 
@@ -89,10 +100,8 @@ L'obiettivo è costruire un MVP solido, ordinato, accessibile e coerente con il 
 La fase Flutter deve seguire questo principio:
 
 > Prima si costruisce una base ordinata, poi si costruiscono le schermate.
-
-Non si parte direttamente creando schermate piene di logica.
-
-Prima bisogna definire:
+> Non si parte direttamente creando schermate piene di logica.
+> Prima bisogna definire:
 
 * messaggi centralizzati;
 * gestione errori;
@@ -102,14 +111,13 @@ Prima bisogna definire:
 * modelli dati essenziali;
 * struttura cartelle;
 * regole di navigazione.
-
-Solo dopo si costruiscono le schermate vere.
+  Solo dopo si costruiscono le schermate vere.
 
 ---
 
 # 5. Ordine generale di lavoro
 
-L'ordine consigliato è:
+L'ordine aggiornato della fase Flutter è:
 
 ```text
 1. Piano Flutter
@@ -118,21 +126,23 @@ L'ordine consigliato è:
 4. Sistema errori centralizzato
 5. Sistema feedback accessibile
 6. Gestione sessione minima
-7. Servizi Supabase
+7. Servizi Supabase di base
 8. Login / logout / sessione
-9. Onboarding
-10. Home
-11. Categorie
-12. Fornitori
-13. Prodotti
-14. Movimenti
-15. Storico movimenti
-16. Verifica accessibilità complessiva
+9. Registrazione account
+10. Onboarding azienda/profilo
+11. Home
+12. Categorie
+13. Fornitori
+14. Prodotti
+15. Movimenti
+16. Storico movimenti
+17. Verifica accessibilità complessiva
+18. Stabilizzazione MVP 1
 ```
 
 Questo ordine evita di creare codice disordinato e difficile da modificare.
-
----
+La registrazione account è stata separata dall'onboarding azienda/profilo per mantenere piccoli i blocchi di lavoro.
+--------------------------------------------------------------------------------------------------------------------
 
 # 6. Decisione D01 — Prima core, poi UI
 
@@ -142,30 +152,30 @@ Decisione:
 SÌ
 ```
 
-Prima di costruire le schermate definitive, verrà creato un core Dart minimo.
-
-Il core Dart conterrà le parti comuni dell'applicazione:
+Prima di costruire le schermate definitive, è stato creato un core Dart minimo.
+Il core Dart contiene le parti comuni dell'applicazione:
 
 * messaggi;
 * errori;
 * feedback;
 * accessibilità;
 * sessione;
-* servizi condivisi;
+* servizi condivisi minimi;
 * modelli base;
 * utilità comuni.
-
-Motivazione:
-
-se si parte subito dalle schermate, il rischio è avere:
-
+  Motivazione:
+  se si parte subito dalle schermate, il rischio è avere:
 * testi sparsi nei pulsanti;
 * errori gestiti in modi diversi;
 * query Supabase dentro la UI;
 * logica duplicata;
 * accessibilità aggiunta dopo, in modo fragile.
+  Il core serve per evitare questo problema.
+  Stato:
 
-Il core serve per evitare questo problema.
+```text
+COMPLETATO
+```
 
 ---
 
@@ -186,11 +196,8 @@ Nessun testo visibile all'utente deve essere scritto direttamente dentro:
 * funzioni di salvataggio;
 * funzioni di errore;
 * callback dei widget.
-
-I testi devono essere centralizzati.
-
-Esempi di testi da centralizzare:
-
+  I testi devono essere centralizzati.
+  Esempi di testi da centralizzare:
 * "Accesso eseguito correttamente";
 * "Uscita eseguita correttamente";
 * "Email obbligatoria";
@@ -201,13 +208,9 @@ Esempi di testi da centralizzare:
 * "Errore durante il caricamento dei dati";
 * "Connessione assente. Controlla Internet e riprova.";
 * "Attenzione: scorta inferiore al livello minimo".
-
-Motivazione:
-
-le stringhe sparse rendono l'app difficile da mantenere.
-
-Un sistema centralizzato permette di:
-
+  Motivazione:
+  le stringhe sparse rendono l'app difficile da mantenere.
+  Un sistema centralizzato permette di:
 * correggere un testo in un solo punto;
 * mantenere coerenza tra schermate;
 * preparare una futura localizzazione;
@@ -218,70 +221,53 @@ Un sistema centralizzato permette di:
 
 # 8. Sistema messaggi centralizzato
 
-Verrà creato un sistema centrale per i messaggi utente.
-
-Cartella proposta:
+È stato creato un sistema centrale per i messaggi utente.
+Cartella:
 
 ```text
 lib/core/messages/
 ```
 
-File iniziali proposti:
+File operativo attuale:
 
 ```text
 app_messages.dart
+```
+
+Scelta aggiornata:
+per l'MVP 1 iniziale si usa un solo file principale `app_messages.dart`, semplice e controllabile.
+File separati come:
+
+```text
 app_error_messages.dart
 app_accessibility_messages.dart
 ```
 
+potranno essere valutati in futuro solo se `app_messages.dart` diventerà troppo grande.
+
 ## 8.1 app_messages.dart
 
-Contiene i messaggi normali dell'app.
-
+Contiene i messaggi principali dell'app.
 Esempi:
 
 * login riuscito;
 * logout riuscito;
+* email obbligatoria;
+* password obbligatoria;
+* registrazione riuscita;
 * categoria creata;
 * fornitore creato;
 * prodotto creato;
 * movimento registrato;
 * dati salvati;
-* nessun risultato trovato.
+* nessun risultato trovato;
+* errore generico;
+* errore connessione.
+  Regola:
 
-## 8.2 app_error_messages.dart
-
-Contiene i messaggi di errore mostrati all'utente.
-
-Esempi:
-
-* email obbligatoria;
-* password obbligatoria;
-* nome obbligatorio;
-* scorta insufficiente;
-* prodotto non trovato;
-* fornitore non valido;
-* errore di connessione;
-* sessione scaduta;
-* operazione non autorizzata.
-
-## 8.3 app_accessibility_messages.dart
-
-Contiene messaggi pensati per gli screen reader.
-
-Esempi:
-
-* accesso completato;
-* uscita completata;
-* salvataggio completato;
-* errore nel modulo;
-* prodotto selezionato;
-* movimento registrato;
-* attenzione scorta minima superata.
-
-Questi messaggi possono essere uguali o leggermente diversi dai messaggi visivi.
-
-L'importante è che siano chiari quando vengono ascoltati.
+```text
+i messaggi importanti restano centralizzati
+```
 
 ---
 
@@ -294,17 +280,14 @@ SÌ
 ```
 
 I messaggi importanti non devono essere solo temporanei.
-
 L'app deve prevedere un'area di feedback stabile nella schermata.
-
 Questa area deve poter mostrare:
 
 * messaggi di successo;
 * messaggi di errore;
 * avvisi;
 * informazioni importanti.
-
-Esempi:
+  Esempi:
 
 ```text
 Prodotto salvato correttamente.
@@ -314,34 +297,30 @@ Movimento registrato correttamente.
 ```
 
 Motivazione:
-
 un messaggio temporaneo può non essere letto dallo screen reader.
-
 Un messaggio stabile può invece essere riletto dall'utente.
-
-Questa decisione nasce anche dai problemi emersi nella console Flutter provvisoria, dove alcuni messaggi non venivano intercettati chiaramente da NVDA.
-
----
+Questa decisione nasce anche dai problemi emersi nella console Flutter provvisoria e nei test manuali con NVDA.
+---------------------------------------------------------------------------------------------------------------
 
 # 10. Sistema feedback applicativo
 
-Cartella proposta:
+Cartella:
 
 ```text
 lib/core/feedback/
 ```
 
-File iniziali proposti:
+File creati:
 
 ```text
 app_feedback_message.dart
 app_feedback_controller.dart
+app_feedback_view.dart
 ```
 
 ## 10.1 app_feedback_message.dart
 
 Definisce il tipo di messaggio.
-
 Tipi previsti:
 
 ```text
@@ -351,7 +330,7 @@ avviso
 informazione
 ```
 
-Ogni messaggio dovrebbe contenere:
+Ogni messaggio può contenere:
 
 * testo visibile;
 * eventuale testo per screen reader;
@@ -361,13 +340,23 @@ Ogni messaggio dovrebbe contenere:
 ## 10.2 app_feedback_controller.dart
 
 Gestisce il messaggio corrente mostrato nella schermata.
-
 Responsabilità:
 
 * impostare un nuovo messaggio;
 * cancellare il messaggio;
 * indicare se il messaggio è errore, successo, avviso o informazione;
 * collaborare con il sistema accessibilità.
+
+## 10.3 app_feedback_view.dart
+
+Mostra il feedback persistente nella UI.
+Responsabilità:
+
+* rendere il messaggio visibile;
+* renderlo leggibile da screen reader;
+* non affidare il significato solo al colore;
+* usare semantica accessibile;
+* collaborare con gli annunci vocali quando necessario.
 
 ---
 
@@ -380,9 +369,7 @@ SÌ
 ```
 
 L'accessibilità non deve essere aggiunta alla fine.
-
 Ogni schermata deve nascere già accessibile.
-
 Regole minime:
 
 * pulsanti con testo chiaro;
@@ -394,34 +381,45 @@ Regole minime:
 * feedback sempre testuale;
 * errori spiegati in modo comprensibile;
 * schermate utilizzabili da tastiera e screen reader dove applicabile.
+  Questa regola è stata applicata nei blocchi 001 e 002.
+  Nel blocco 002 sono stati verificati anche gli annunci NVDA dei feedback principali.
 
 ---
 
 # 12. Sistema accessibilità
 
-Cartella proposta:
+Cartella:
 
 ```text
 lib/core/accessibility/
 ```
 
-File iniziali proposti:
+File operativo attuale:
 
 ```text
 accessibility_service.dart
+```
+
+Scelta aggiornata:
+per l'MVP 1 iniziale si mantiene un sistema accessibilità minimo.
+File separati come:
+
+```text
 accessible_feedback.dart
 focus_helpers.dart
 ```
+
+non vengono creati in anticipo.
+Potranno essere introdotti solo quando un blocco concreto li renderà necessari.
 
 ## 12.1 accessibility_service.dart
 
 Responsabilità:
 
 * centralizzare eventuali annunci per screen reader;
-* evitare annunci sparsi nei widget;
+* evitare annunci sparsi senza criterio;
 * fornire metodi semplici da usare nelle schermate.
-
-Esempi logici:
+  Esempi logici:
 
 ```text
 annuncia successo
@@ -430,30 +428,10 @@ annuncia avviso
 annuncia cambio schermata
 ```
 
-## 12.2 accessible_feedback.dart
-
-Responsabilità:
-
-* collegare il messaggio visivo al messaggio accessibile;
-* garantire che un messaggio importante sia sia mostrato sia leggibile.
-
-## 12.3 focus_helpers.dart
-
-Responsabilità:
-
-* supportare lo spostamento del focus nei punti importanti;
-* aiutare nei form;
-* aiutare dopo salvataggi o errori.
-
 Nota:
-
 questo sistema non sostituisce la corretta costruzione delle schermate.
-
-Serve come supporto centrale.
-
 La vera accessibilità dipende anche da come vengono scritti i widget.
-
----
+---------------------------------------------------------------------
 
 # 13. Decisione D05 — Non basarsi solo sugli annunci vocali
 
@@ -464,7 +442,6 @@ SÌ
 ```
 
 Gli annunci vocali sono utili, ma non devono essere l'unico modo per comunicare un risultato.
-
 Regola:
 
 ```text
@@ -473,12 +450,9 @@ Poi, se utile, può anche essere annunciato.
 ```
 
 Motivazione:
-
 se lo screen reader non intercetta un annuncio, l'utente deve comunque poter ritrovare il messaggio nella schermata.
-
 Questa regola è fondamentale per l'accessibilità.
-
----
+-------------------------------------------------
 
 # 14. Decisione D06 — Backend fonte della verità
 
@@ -489,7 +463,6 @@ SÌ
 ```
 
 Flutter non deve duplicare le regole critiche del backend come se fosse lui la fonte della verità.
-
 Flutter deve:
 
 * raccogliere dati;
@@ -499,9 +472,7 @@ Flutter deve:
 * invocare le RPC;
 * leggere i risultati;
 * aggiornare la UI.
-
-Flutter non deve:
-
+  Flutter non deve:
 * modificare direttamente `prodotti.scorta_attuale`;
 * inserire direttamente record in `movimenti_magazzino`;
 * aggirare le RPC;
@@ -510,7 +481,50 @@ Flutter non deve:
 
 ---
 
-# 15. Collegamento a Supabase
+# 15. Decisione D07 — Registrazione account separata da onboarding
+
+Decisione:
+
+```text
+SÌ
+```
+
+La registrazione account viene separata dall'onboarding azienda/profilo.
+Significato:
+
+```text
+Registrazione account = crea l'utente Supabase Auth.
+Onboarding = crea azienda e profilo applicativo tramite RPC crea_azienda_e_profilo.
+```
+
+Motivazione:
+
+* un utente finale non deve usare Supabase Dashboard;
+* un utente finale non deve lanciare query SQL;
+* la registrazione deve essere disponibile dall'app;
+* ogni blocco deve avere una sola missione;
+* Antigravity deve ricevere istruzioni più piccole e meno ambigue;
+* se un problema nasce nella registrazione, resta nel blocco 003;
+* se un problema nasce nell'onboarding, resta nel blocco 004.
+  Nuova sequenza:
+
+```text
+002 Login, logout e sessione
+003 Registrazione account
+004 Onboarding azienda/profilo
+005 Home
+```
+
+Regola:
+
+```text
+il blocco 003 non crea azienda e profilo
+il blocco 004 non crea l'account Supabase Auth
+```
+
+---
+
+# 16. Collegamento a Supabase
 
 Supabase è già configurato nel progetto Flutter tramite:
 
@@ -531,10 +545,18 @@ service role key
 ```
 
 La service role key non deve mai essere inserita nell'app Flutter.
+Flutter userà Supabase per:
+
+* login;
+* logout;
+* recupero sessione;
+* registrazione account;
+* lettura dati consentiti dalle RLS;
+* chiamata alle RPC previste.
 
 ---
 
-# 16. Regole Supabase per Flutter
+# 17. Regole Supabase per Flutter
 
 Flutter può eseguire query consentite dalle RLS su:
 
@@ -544,24 +566,21 @@ Flutter può eseguire query consentite dalle RLS su:
 * fornitori;
 * prodotti;
 * movimenti_magazzino in sola lettura.
-
-Flutter può inserire e aggiornare:
-
+  Flutter può inserire e aggiornare:
 * categorie;
 * fornitori;
 * prodotti;
-* profilo, dove consentito.
-
-Flutter non può:
-
+* profilo, dove consentito e quando previsto dal blocco specifico.
+  Flutter non può:
 * eliminare fisicamente categorie;
 * eliminare fisicamente fornitori;
 * eliminare fisicamente prodotti;
 * eliminare o modificare movimenti;
 * inserire movimenti direttamente;
-* aggiornare direttamente la scorta.
-
-Per i movimenti Flutter deve usare:
+* aggiornare direttamente la scorta;
+* usare la service role key;
+* bypassare le RLS.
+  Per i movimenti Flutter deve usare:
 
 ```text
 registra_movimento
@@ -573,705 +592,726 @@ Per l'onboarding Flutter deve usare:
 crea_azienda_e_profilo
 ```
 
----
+## Per la registrazione account Flutter deve usare Supabase Auth.
 
-# 17. Gestione errori Supabase
+# 18. Gestione errori Supabase
 
 Gli errori tecnici di Supabase non devono essere mostrati direttamente all'utente finale se sono troppo tecnici.
+Serve un livello di traduzione tra:
 
-Serve un livello di traduzione.
+```text
+errore tecnico
+↓
+errore applicativo
+↓
+messaggio utente comprensibile
+```
 
-Cartella proposta:
+Cartella:
 
 ```text
 lib/core/errors/
 ```
 
-File iniziali proposti:
+File creati:
 
 ```text
 app_exception.dart
 supabase_error_mapper.dart
 ```
 
-## 17.1 app_exception.dart
+## 18.1 app_exception.dart
 
-Definisce un errore applicativo comprensibile.
-
+Rappresenta un errore applicativo.
 Deve contenere:
 
 * messaggio utente;
-* tipo errore;
-* eventuale dettaglio tecnico per debug;
-* eventuale messaggio accessibile.
+* eventuale messaggio tecnico per debug;
+* tipo o categoria dell'errore, se utile.
 
-## 17.2 supabase_error_mapper.dart
+## 18.2 supabase_error_mapper.dart
 
-Converte errori Supabase in messaggi comprensibili.
-
+Traduce errori Supabase o errori tecnici in messaggi comprensibili.
 Esempi:
 
 ```text
-Errore tecnico: duplicate key
-Messaggio utente: Esiste già un elemento con questo nome.
-
-Errore tecnico: invalid login credentials
-Messaggio utente: Email o password non corrette.
-
-Errore tecnico: JWT expired
-Messaggio utente: Sessione scaduta. Accedi di nuovo.
+Invalid login credentials
+↓
+Email o password non corrette.
 ```
 
----
+```text
+violates row-level security policy
+↓
+Operazione non autorizzata.
+```
 
-# 18. Gestione assenza rete
+```text
+duplicate key value
+↓
+Esiste già un elemento con questo nome.
+```
 
-L'offline completo non fa parte dell'MVP 1.
+Regola:
+gli errori tecnici non devono comparire nella UI.
+-------------------------------------------------
 
-L'app non deve implementare sincronizzazione offline in questa fase.
+# 19. Gestione assenza rete
 
-Tuttavia deve gestire in modo chiaro gli errori di connessione.
-
-Se una chiamata Supabase fallisce per assenza di rete, timeout o problema simile, l'utente deve ricevere un messaggio comprensibile.
-
-Esempi:
+L'app deve gestire l'assenza di connessione.
+Quando possibile, il messaggio deve essere:
 
 ```text
 Connessione assente. Controlla Internet e riprova.
-Impossibile completare l'operazione. Verifica la connessione.
 ```
 
-Questi messaggi devono passare dal sistema centralizzato degli errori.
+Per l'MVP 1 non è previsto un sistema offline completo.
+Non si deve implementare sincronizzazione offline.
+Si deve però evitare che l'utente riceva errori tecnici incomprensibili.
+------------------------------------------------------------------------
 
-Non devono essere scritti direttamente nelle schermate.
+# 20. Gestione stato e dipendenze
 
-La gestione degli errori di rete deve quindi essere integrata in:
+## 20.1 Scelta consigliata per lo stato
 
-```text
-supabase_error_mapper.dart
-```
+Per l'MVP 1 si usa una gestione semplice dello stato.
+Non introdurre framework complessi se non necessari.
+Sono da evitare nella fase iniziale:
 
-oppure nel sistema equivalente di mappatura errori.
+* BLoC;
+* Riverpod;
+* GetIt;
+* service locator obbligatorio;
+* architetture troppo astratte.
+  Il progetto deve restare comprensibile.
+  La gestione sessione è stata centralizzata nel blocco 002 tramite coordinator dedicato.
+
+## 20.2 Regola sulle dipendenze
+
+Aggiungere una dipendenza solo se serve davvero.
+Ogni nuova dipendenza deve avere una motivazione chiara.
+Da evitare:
+
+* pacchetti usati solo per comodità momentanea;
+* pacchetti pesanti per problemi semplici;
+* pacchetti non necessari al blocco corrente.
 
 ---
 
-# 19. Gestione stato e dipendenze
+# 21. Struttura cartelle proposta
 
-Per l'MVP 1 si userà una gestione dello stato semplice.
-
-Non verranno introdotti subito pattern complessi come BLoC.
-
-La sessione utente, il profilo corrente e l'azienda corrente saranno gestiti da un controller centrale, ad esempio:
-
-```text
-AppSessionController
-```
-
-Questo controller avrà il compito di sapere:
-
-* se l'utente è autenticato;
-* se esiste una sessione Supabase;
-* se esiste un profilo applicativo;
-* quale azienda è collegata all'utente;
-* quale schermata iniziale deve essere mostrata.
-
-Il client Supabase sarà centralizzato.
-
-Le schermate non devono inizializzare direttamente Supabase e non devono contenere query sparse.
-
-Le schermate dovranno chiamare servizi o controller dedicati.
-
-Per l'MVP 1 non si introduce obbligatoriamente un service locator come `get_it`.
-
-Se il numero di servizi crescerà, l'introduzione di un service locator potrà essere valutata in una fase successiva.
-
-## 19.1 Scelta consigliata per lo stato
-
-Per partire in modo semplice si potranno usare:
-
-* controller Dart semplice;
-* `ValueNotifier`;
-* `ChangeNotifier`.
-
-Da evitare in questa fase:
-
-* BLoC completo per ogni schermata;
-* architetture di stato complesse premature;
-* service locator introdotti prima che siano realmente necessari.
-
-## 19.2 Regola sulle dipendenze
-
-Regola:
-
-```text
-Le schermate non devono creare direttamente il client Supabase.
-```
-
-Le schermate devono parlare con servizi o controller.
-
-I servizi useranno il client Supabase già configurato.
-
----
-
-# 20. Struttura cartelle proposta
-
-Struttura iniziale consigliata:
+La struttura deve restare semplice.
+Struttura logica:
 
 ```text
 lib/
-  main.dart
-
+  app/
   config/
-    supabase_config.dart
-
   core/
-    accessibility/
-      accessibility_service.dart
-      accessible_feedback.dart
-      focus_helpers.dart
-
-    errors/
-      app_exception.dart
-      supabase_error_mapper.dart
-
-    feedback/
-      app_feedback_controller.dart
-      app_feedback_message.dart
-
-    messages/
-      app_messages.dart
-      app_error_messages.dart
-      app_accessibility_messages.dart
-
-    session/
-      app_session_controller.dart
-
   features/
-    auth/
-      data/
-      domain/
-      presentation/
-
-    onboarding/
-      data/
-      domain/
-      presentation/
-
-    home/
-      presentation/
-
-    categorie/
-      data/
-      domain/
-      presentation/
-
-    fornitori/
-      data/
-      domain/
-      presentation/
-
-    prodotti/
-      data/
-      domain/
-      presentation/
-
-    movimenti/
-      data/
-      domain/
-      presentation/
 ```
 
-Questa struttura separa:
+## 21.1 app
 
-* dati;
-* logica;
-* schermate;
-* core condiviso.
+Contiene l'avvio applicativo e il widget root.
+Esempio:
 
-## 20.1 data
+```text
+lib/app/app_root.dart
+```
 
-Contiene il collegamento concreto a Supabase.
+## 21.2 config
 
+Contiene configurazioni.
+Esempio:
+
+```text
+lib/config/supabase_config.dart
+```
+
+## 21.3 core
+
+Contiene parti condivise.
 Esempi:
 
-* query;
-* insert;
-* update;
-* RPC.
+```text
+lib/core/messages/
+lib/core/errors/
+lib/core/feedback/
+lib/core/accessibility/
+lib/core/session/
+```
 
-## 20.2 domain
+## 21.4 features
 
-Contiene modelli e regole applicative semplici.
-
+Contiene le funzionalità applicative.
 Esempi:
 
-* modello categoria;
-* modello prodotto;
-* modello movimento;
-* validazioni non critiche per form.
+```text
+lib/features/auth/
+lib/features/account_registration/
+lib/features/onboarding/
+lib/features/home/
+lib/features/categories/
+lib/features/suppliers/
+lib/features/products/
+lib/features/movements/
+```
 
-## 20.3 presentation
+## 21.5 data
+
+Contiene servizi o classi che parlano con Supabase.
+Non deve mostrare UI.
+
+## 21.6 domain
+
+Contiene modelli o risultati logici.
+Non deve dipendere dai widget.
+
+## 21.7 presentation
 
 Contiene schermate e widget.
+Non deve contenere query Supabase dirette.
+------------------------------------------
 
-Esempi:
+# 22. Nota sulla semplicità
 
-* pagina login;
-* pagina lista prodotti;
-* form prodotto;
-* pagina movimento.
+La struttura proposta non deve diventare una gabbia.
+Regola:
 
-## 20.4 core
+```text
+creare solo ciò che serve al blocco corrente
+```
 
-Contiene elementi condivisi da tutta l'app.
+Non creare cartelle vuote solo perché previste in teoria.
+Non creare file futuri in anticipo.
+Non costruire architettura pesante.
+Il progetto deve rimanere:
 
-Esempi:
-
-* messaggi;
-* errori;
-* accessibilità;
-* feedback;
-* sessione;
-* utilità comuni.
+* leggibile;
+* testabile;
+* accessibile;
+* facile da correggere.
 
 ---
 
-# 21. Nota sulla semplicità
-
-La struttura proposta non deve diventare troppo pesante.
-
-Se in una fase iniziale una cartella resta vuota, non è un problema.
-
-L'obiettivo è avere una direzione ordinata, non creare complessità inutile.
-
-Regola pratica:
-
-```text
-Creare solo i file che servono davvero nel passo corrente.
-```
-
-Questa regola è fondamentale.
-
-La struttura cartelle indica la direzione del progetto, ma non obbliga a creare immediatamente tutti i file previsti.
-
-Per il primo blocco di codice è sufficiente creare solo il core minimo davvero necessario.
-
-Esempio di partenza minima:
-
-```text
-messaggi base
-mapper errori semplice
-feedback persistente semplice
-accessibility_service minimo
-app_session_controller minimo
-```
-
-File più specifici, come `focus_helpers.dart`, possono essere creati solo quando serviranno davvero.
-
----
-
-# 22. Schermate MVP previste
+# 23. Schermate MVP previste
 
 Le schermate previste per l'MVP 1 sono:
 
-```text
-Login
-Onboarding
-Home
-Lista categorie
-Form categoria
-Lista fornitori
-Form fornitore
-Lista prodotti
-Dettaglio prodotto
-Form prodotto
-Registrazione carico
-Registrazione vendita
-Registrazione rettifica
-Storico movimenti
-```
-
-Il reso è previsto dalla logica backend, ma può essere inserito dopo carico, vendita e rettifica se si vuole ridurre la complessità iniziale dell'interfaccia.
+* Login;
+* Registrazione account;
+* Onboarding azienda/profilo;
+* Home;
+* Lista categorie;
+* Form categoria;
+* Lista fornitori;
+* Form fornitore;
+* Lista prodotti;
+* Dettaglio prodotto;
+* Form prodotto;
+* Registrazione carico;
+* Registrazione vendita;
+* Registrazione rettifica;
+* Registrazione reso;
+* Storico movimenti.
+  Ogni schermata deve avere:
+* titolo chiaro;
+* contenuto leggibile;
+* pulsanti con testo;
+* feedback persistente;
+* errori accessibili;
+* ordine logico del focus.
 
 ---
 
-# 23. Ordine di sviluppo delle schermate
-
-Ordine consigliato:
+# 24. Ordine di sviluppo delle schermate
 
 ## Fase 1 — Login, logout e sessione
+
+Stato:
+
+```text
+COMPLETATO
+```
 
 Obiettivo:
 
 * login;
 * logout;
 * controllo sessione;
-* gestione utente autenticato;
-* ritorno corretto alla login dopo logout.
+* lettura profilo;
+* lettura azienda;
+* placeholder onboarding;
+* placeholder home.
 
-## Fase 2 — Onboarding
+## Fase 2 — Registrazione account
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
-* se l'utente non ha profilo, mostrare onboarding;
-* creare azienda e profilo tramite RPC;
-* impedire doppio onboarding.
+* accesso alla registrazione dalla login;
+* form email;
+* form password;
+* conferma password;
+* creazione utente Supabase Auth;
+* gestione email già usata;
+* gestione password non valida;
+* feedback persistente;
+* accessibilità NVDA.
 
-## Fase 3 — Home
+## Fase 3 — Onboarding azienda/profilo
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
+* sostituire il placeholder onboarding;
+* inserimento nome azienda;
+* eventuale nome profilo;
+* chiamata RPC `crea_azienda_e_profilo`;
+* creazione azienda;
+* creazione profilo;
+* passaggio alla home.
+
+## Fase 4 — Home
+
+Stato:
+
+```text
+DA FARE
+```
+
+Obiettivo:
+
+* sostituire il placeholder home;
 * mostrare nome azienda;
-* mostrare utente corrente;
-* collegamenti alle sezioni principali.
+* mostrare collegamenti principali;
+* mantenere logout raggiungibile.
 
-## Fase 4 — Categorie
+## Fase 5 — Categorie
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
 * lista categorie;
-* creazione categoria;
-* modifica categoria;
-* disattivazione logica tramite `attiva = false` in una fase successiva.
+* creazione;
+* modifica;
+* disattivazione.
 
-## Fase 5 — Fornitori
+## Fase 6 — Fornitori
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
 * lista fornitori;
-* creazione fornitore;
-* modifica fornitore;
-* disattivazione logica tramite `attivo = false` in una fase successiva.
+* creazione;
+* modifica;
+* disattivazione.
 
-## Fase 6 — Prodotti
+## Fase 7 — Prodotti
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
 * lista prodotti;
-* dettaglio prodotto;
-* creazione prodotto;
-* modifica prodotto;
-* visualizzazione scorta;
-* collegamento a categoria e fornitore.
+* dettaglio;
+* creazione;
+* modifica;
+* disattivazione;
+* blocco modifica diretta scorta.
 
-## Fase 7 — Movimenti
+## Fase 8 — Movimenti
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
 * carico;
 * vendita;
+* reso;
 * rettifica;
+* uso RPC `registra_movimento`;
 * storico movimenti.
 
-## Fase 8 — Revisione accessibilità
+## Fase 9 — Revisione accessibilità
+
+Stato:
+
+```text
+DA FARE
+```
 
 Obiettivo:
 
-* testare l'intero flusso con screen reader;
-* correggere etichette;
-* correggere ordine focus;
-* correggere messaggi poco chiari;
-* verificare che nessuna informazione sia solo visiva.
+* verifica completa con screen reader;
+* ordine focus;
+* messaggi;
+* errori;
+* navigazione.
 
 ---
 
-# 24. Regole per i form
+# 25. Regole per i form
 
-Ogni form deve rispettare queste regole:
+Ogni form deve avere:
 
-* ogni campo ha una label chiara;
-* ogni campo obbligatorio viene indicato in modo testuale;
-* gli errori vengono mostrati vicino al campo o in area messaggi;
-* il primo errore importante deve essere facilmente raggiungibile;
-* il salvataggio deve produrre un messaggio di conferma;
-* il fallimento deve produrre un messaggio di errore comprensibile;
-* i pulsanti devono avere testo esplicito.
-
-Esempi di pulsanti corretti:
-
-```text
-Salva categoria
-Annulla modifica
-Crea prodotto
-Registra carico
-Registra vendita
-```
-
-Esempi da evitare:
-
-```text
-OK
-Vai
-Conferma
-Icona senza testo
-```
+* titolo chiaro;
+* campi con label leggibili;
+* pulsanti con testo esplicito;
+* validazioni prima dell'invio;
+* messaggi di errore persistenti;
+* feedback di successo persistente;
+* stato di caricamento quando serve;
+* protezione da doppi invii.
+  Regole generali:
+* stringhe vuote facoltative devono diventare `NULL` quando il backend lo richiede;
+* numeri negativi devono essere bloccati quando non consentiti;
+* quantità devono essere maggiori di zero quando richiesto;
+* errori tecnici devono essere tradotti.
 
 ---
 
-# 25. Regole per le liste
+# 26. Regole per le liste
 
-Ogni lista deve essere leggibile anche con screen reader.
+Ogni lista deve avere:
 
-Una riga di lista deve comunicare le informazioni essenziali.
-
-Esempio per prodotto:
-
-```text
-Concime Universale Modificato, scorta 5 pezzi, prezzo vendita 12 euro.
-```
-
-Non deve essere letta solo come:
-
-```text
-Concime Universale Modificato
-```
-
-se le altre informazioni sono importanti per decidere cosa fare.
+* titolo chiaro;
+* messaggio quando è vuota;
+* elementi leggibili;
+* azioni chiare;
+* stato caricamento;
+* stato errore;
+* retry quando utile.
+  Nessuna informazione importante deve essere comunicata solo con:
+* colore;
+* icona;
+* posizione visiva.
 
 ---
 
-# 26. Regole per i movimenti
+# 27. Regole per i movimenti
 
-I movimenti di magazzino devono sempre passare dalla RPC:
+I movimenti sono la parte più delicata del gestionale.
+Flutter non deve mai inserire direttamente record in:
+
+```text
+movimenti_magazzino
+```
+
+Flutter non deve mai aggiornare direttamente:
+
+```text
+prodotti.scorta_attuale
+```
+
+Deve sempre usare:
 
 ```text
 registra_movimento
 ```
 
-## 26.1 Carico
+## 27.1 Carico
 
-Flutter deve inviare:
+Richiede:
 
 * prodotto;
-* tipo movimento `carico`;
-* quantità;
 * fornitore;
-* prezzo unitario;
-* note facoltative.
-
-Il fornitore è obbligatorio.
-
-## 26.2 Vendita
-
-Flutter deve inviare:
-
-* prodotto;
-* tipo movimento `vendita`;
 * quantità;
 * prezzo unitario facoltativo;
 * note facoltative.
+  Risultato:
+* scorta aumenta;
+* movimento registrato.
 
-Il fornitore non deve essere inviato.
+## 27.2 Vendita
 
-## 26.3 Rettifica
-
-Flutter deve inviare:
+Richiede:
 
 * prodotto;
-* tipo movimento `rettifica`;
+* quantità;
+* prezzo unitario facoltativo;
+* note facoltative.
+  Risultato:
+* scorta diminuisce;
+* movimento registrato.
+  Se la scorta è insufficiente:
+* nessun movimento;
+* scorta invariata;
+* messaggio accessibile.
+
+## 27.3 Rettifica
+
+Richiede:
+
+* prodotto;
 * nuova scorta;
-* motivazione.
+* motivazione o nota.
+  Risultato:
+* scorta portata al valore indicato;
+* movimento registrato.
 
-La quantità non deve essere inviata.
+## 27.4 Reso
 
-La motivazione deve essere obbligatoria lato UI, anche se tecnicamente nel backend il campo note è nullable.
+Richiede:
 
-Motivazione:
-
-una rettifica senza motivo è poco utile nello storico.
-
-## 26.4 Reso
-
-Il reso rappresenta merce restituita dal cliente.
-
-Aumenta la scorta.
-
-Il fornitore non deve essere inviato.
-
-Il reso può essere implementato dopo carico, vendita e rettifica.
+* prodotto;
+* quantità;
+* note facoltative.
+  Risultato:
+* scorta aumenta;
+* movimento registrato.
 
 ---
 
-# 27. Regole per prodotti inattivi
+# 28. Regole per prodotti inattivi
 
-Un prodotto inattivo:
+I prodotti inattivi:
 
-* non deve essere proposto nei form di carico;
-* non deve essere proposto nei form di vendita;
-* non deve essere proposto nei form di reso;
-* non deve essere proposto nei form di rettifica.
-
-Il backend blocca comunque i movimenti su prodotto disattivato.
-
-Flutter deve però evitare di presentare all'utente scelte non valide.
+* non devono essere proposti per nuovi movimenti;
+* possono restare visibili nello storico;
+* possono essere visibili nelle liste se serve;
+* devono essere indicati come inattivi con testo chiaro.
+  Non usare solo colore o icona.
 
 ---
 
-# 28. Regole per categorie e fornitori inattivi
+# 29. Regole per categorie e fornitori inattivi
 
 Categorie inattive:
 
-* non devono essere proposte come scelta normale nei nuovi prodotti;
-* possono restare visibili nello storico o nei prodotti già associati.
-
-Fornitori inattivi:
-
+* non devono essere proposte nei nuovi prodotti;
+* possono restare visibili sui prodotti già collegati;
+* devono essere indicate come inattive con testo.
+  Fornitori inattivi:
 * non devono essere proposti nei nuovi carichi;
-* possono restare visibili nello storico dei movimenti passati.
+* non devono essere proposti come fornitore preferito per nuovi prodotti;
+* possono restare visibili nello storico.
 
 ---
 
-# 29. Navigazione MVP
+# 30. Navigazione MVP
 
-Per l'MVP 1 si userà una navigazione semplice basata su:
-
-```text
-Navigator.push
-Navigator.pop
-```
-
-Non viene introdotto subito un router esterno come `go_router`.
-
-La scelta è motivata dalla volontà di mantenere il progetto:
-
-* semplice;
-* leggibile;
-* adatto allo sviluppo manuale;
-* facile da seguire con screen reader;
-* modificabile passo per passo.
-
-Ogni schermata deve avere:
-
-* titolo chiaro;
-* pulsanti di navigazione espliciti;
-* ritorno prevedibile alla schermata precedente;
-* eventuale messaggio o annuncio accessibile quando il cambio schermata è importante.
-
-La schermata iniziale dell'app deve decidere in modo centralizzato se mostrare:
-
-* login;
-* onboarding;
-* home.
-
-Questa logica non deve essere duplicata in più pagine.
-
-`go_router` o altri sistemi di routing più strutturati potranno essere valutati in futuro se la navigazione crescerà di complessità.
-
----
-
-# 30. Stato iniziale dell'app
-
-All'avvio l'app deve verificare:
+La navigazione deve essere semplice.
+Per l'MVP 1 non serve un router complesso.
+Flusso generale:
 
 ```text
-utente non autenticato
+avvio app
 ↓
-mostra login
+controllo sessione
+↓
+login
+↓
+registrazione account, se utente nuovo
+↓
+onboarding, se utente autenticato senza profilo
+↓
+home, se utente con profilo e azienda
+↓
+sezioni gestionali
 ```
+
+Regola:
 
 ```text
-utente autenticato senza profilo
-↓
-mostra onboarding
+la navigazione deve seguire lo stato applicativo
 ```
 
-```text
-utente autenticato con profilo
-↓
-mostra home
-```
+Non devono esserci schermate raggiungibili senza i prerequisiti corretti.
+Esempio:
 
-Questo controllo deve essere centralizzato, non duplicato in più schermate.
-
-La logica appartiene al controller di sessione o al punto di ingresso dell'app, non alle singole schermate.
+* la home non deve essere accessibile senza login;
+* le sezioni gestionali non devono essere accessibili senza profilo e azienda;
+* l'onboarding non deve creare un secondo profilo se il profilo esiste già.
 
 ---
 
-# 31. Fuori scope MVP 1 — Recupero password
+# 31. Stato iniziale dell'app
 
-Il recupero password non fa parte dell'MVP 1 Flutter.
+All'avvio l'app deve:
 
-Potrà essere progettato in una fase successiva.
+1. inizializzare Supabase;
+2. controllare la sessione corrente;
+3. mostrare caricamento accessibile;
+4. decidere lo stato:
 
-In questa fase l'obiettivo è validare:
+```text
+nessuna sessione → login
+sessione presente senza profilo → onboarding
+sessione presente con profilo e azienda → home
+```
 
-* login;
-* logout;
-* onboarding;
-* home;
-* categorie;
-* fornitori;
-* prodotti;
-* movimenti principali di magazzino.
+Questa logica è stata implementata nel blocco 002 con un coordinator centrale.
+Il blocco 003 aggiungerà il ramo:
 
-Il fatto che il recupero password sia fuori scope deve essere esplicito, così da non confonderlo con una dimenticanza.
+```text
+utente senza account → registrazione account
+```
+
+## Il blocco 004 sostituirà il placeholder onboarding con onboarding reale.
+
+# 32. Fuori scope MVP 1 — Recupero password
+
+Il recupero password non fa parte dell'MVP 1.
+Non verrà implementato nei primi blocchi Flutter.
+Potrà essere valutato in una fase successiva.
+Motivazione:
+
+* riduce complessità iniziale;
+* evita di introdurre flussi email aggiuntivi;
+* permette di concentrarsi su registrazione, onboarding e gestione magazzino.
+  Questa è una scelta di scope, non una dimenticanza.
 
 ---
 
-# 32. Test manuali minimi — Login
+# 33. Test manuali minimi — Login
 
 ## Test L001 — Schermata login leggibile
 
 Risultato atteso:
 
-* screen reader legge titolo;
-* legge campo email;
-* legge campo password;
-* legge pulsante accedi.
+* campo email leggibile;
+* campo password leggibile;
+* pulsante Accedi leggibile;
+* pulsante o link Crea account leggibile quando sarà implementato.
 
 ## Test L002 — Login con campi vuoti
 
 Risultato atteso:
 
-* messaggio errore email obbligatoria;
-* messaggio errore password obbligatoria;
-* messaggio leggibile da screen reader.
+* messaggio email obbligatoria;
+* messaggio password obbligatoria quando applicabile;
+* messaggio persistente;
+* messaggio annunciato da NVDA.
 
 ## Test L003 — Login credenziali errate
 
 Risultato atteso:
 
-* messaggio comprensibile;
-* nessun dettaglio tecnico inutile.
+* errore comprensibile;
+* nessun accesso;
+* feedback persistente;
+* annuncio NVDA.
 
 ## Test L004 — Login corretto
 
 Risultato atteso:
 
-* accesso eseguito;
-* passaggio alla schermata corretta;
-* feedback accessibile.
+* accesso riuscito;
+* controllo profilo;
+* passaggio a onboarding o home in base allo stato utente.
 
 ## Test L005 — Logout
 
 Risultato atteso:
 
-* la sessione viene terminata;
-* l'utente torna alla schermata login;
-* la home non è più accessibile senza nuovo accesso;
-* il messaggio di logout è leggibile da screen reader.
+* sessione chiusa;
+* ritorno a login;
+* sessione non recuperata dopo riavvio;
+* feedback accessibile.
 
 ---
 
-# 33. Test manuali minimi — Onboarding
+# 34. Test manuali minimi — Registrazione account
+
+## Test R001 — Schermata registrazione raggiungibile
+
+Risultato atteso:
+
+* dalla login è possibile raggiungere la registrazione;
+* il ritorno alla login è possibile;
+* i pulsanti sono leggibili da screen reader.
+
+## Test R002 — Campi vuoti
+
+Risultato atteso:
+
+* email obbligatoria;
+* password obbligatoria;
+* conferma password obbligatoria;
+* feedback persistente;
+* annuncio NVDA.
+
+## Test R003 — Conferma password errata
+
+Risultato atteso:
+
+* registrazione bloccata;
+* messaggio comprensibile;
+* nessun account creato.
+
+## Test R004 — Email già registrata
+
+Risultato atteso:
+
+* registrazione bloccata;
+* messaggio comprensibile;
+* nessun crash;
+* l'utente resta nella registrazione o può tornare al login.
+
+## Test R005 — Registrazione corretta
+
+Risultato atteso:
+
+* account Supabase Auth creato;
+* feedback chiaro;
+* comportamento successivo coerente con configurazione Supabase Auth;
+* nessuna azienda creata in questo blocco;
+* nessun profilo creato in questo blocco.
+
+---
+
+# 35. Test manuali minimi — Onboarding
 
 ## Test O001 — Utente senza profilo
 
 Risultato atteso:
 
-* app mostra onboarding.
+* dopo login o registrazione, se l'utente è autenticato ma senza profilo, viene mostrato onboarding reale.
 
 ## Test O002 — Nome azienda vuoto
 
 Risultato atteso:
 
-* errore nome azienda obbligatorio.
+* onboarding bloccato;
+* messaggio nome azienda obbligatorio;
+* feedback persistente;
+* annuncio NVDA.
 
 ## Test O003 — Onboarding corretto
 
 Risultato atteso:
 
-* RPC chiamata correttamente;
+* RPC `crea_azienda_e_profilo` chiamata;
 * azienda creata;
 * profilo creato;
 * passaggio alla home.
@@ -1280,117 +1320,114 @@ Risultato atteso:
 
 Risultato atteso:
 
-* errore gestito in modo comprensibile;
-* nessuna seconda azienda creata.
+* nessuna seconda azienda;
+* nessun secondo profilo;
+* messaggio comprensibile.
 
 ---
 
-# 34. Test manuali minimi — Home
+# 36. Test manuali minimi — Home
 
 ## Test H001 — Home leggibile
 
 Risultato atteso:
 
-* screen reader legge nome azienda;
-* legge utente;
-* legge collegamenti principali.
+* titolo leggibile;
+* nome azienda leggibile;
+* azioni principali leggibili.
 
 ## Test H002 — Navigazione sezioni
 
 Risultato atteso:
 
-* categorie raggiungibile;
-* fornitori raggiungibile;
-* prodotti raggiungibile;
-* movimenti raggiungibile.
+* accesso a categorie;
+* accesso a fornitori;
+* accesso a prodotti;
+* accesso a movimenti;
+* logout raggiungibile.
 
 ---
 
-# 35. Test manuali minimi — Categorie
+# 37. Test manuali minimi — Categorie
 
 ## Test C001 — Lista categorie
 
 Risultato atteso:
 
-* categorie caricate;
-* ogni riga leggibile.
+* lista leggibile;
+* stato vuoto gestito.
 
 ## Test C002 — Creazione categoria
 
 Risultato atteso:
 
-* categoria salvata;
-* messaggio successo;
-* lista aggiornata.
+* categoria creata;
+* feedback successo.
 
 ## Test C003 — Nome categoria vuoto
 
 Risultato atteso:
 
-* errore leggibile.
+* errore nome obbligatorio.
 
 ## Test C004 — Nome duplicato
 
 Risultato atteso:
 
-* errore comprensibile.
+* errore duplicato comprensibile.
 
 ---
 
-# 36. Test manuali minimi — Fornitori
+# 38. Test manuali minimi — Fornitori
 
 ## Test F001 — Lista fornitori
 
 Risultato atteso:
 
-* fornitori caricati;
-* ogni riga leggibile.
+* lista leggibile;
+* stato vuoto gestito.
 
 ## Test F002 — Creazione fornitore
 
 Risultato atteso:
 
-* fornitore salvato;
-* messaggio successo;
-* lista aggiornata.
+* fornitore creato;
+* feedback successo.
 
 ## Test F003 — Nome fornitore vuoto
 
 Risultato atteso:
 
-* errore leggibile.
+* errore nome obbligatorio.
 
 ## Test F004 — Nome duplicato
 
 Risultato atteso:
 
-* errore comprensibile.
+* errore duplicato comprensibile.
 
 ---
 
-# 37. Test manuali minimi — Prodotti
+# 39. Test manuali minimi — Prodotti
 
 ## Test P001 — Lista prodotti
 
 Risultato atteso:
 
-* prodotti caricati;
-* nome e scorta leggibili.
+* lista leggibile;
+* stato vuoto gestito.
 
 ## Test P002 — Creazione prodotto
 
 Risultato atteso:
 
-* prodotto salvato;
-* scorta iniziale 0;
-* messaggio successo.
+* prodotto creato con scorta iniziale 0.
 
 ## Test P003 — Barcode vuoto
 
 Risultato atteso:
 
-* barcode salvato come NULL;
-* nessuna stringa vuota.
+* barcode vuoto salvato come `NULL`.
 
 ## Test P004 — Barcode duplicato
 
@@ -1409,240 +1446,234 @@ Risultato atteso:
 
 Risultato atteso:
 
-* il prodotto inattivo resta gestibile dove previsto;
-* il suo stato inattivo è comunicato in modo testuale;
-* lo stato non è comunicato solo tramite colore o icona.
+* prodotto indicato come inattivo con testo chiaro.
 
 ---
 
-# 38. Test manuali minimi — Movimenti
+# 40. Test manuali minimi — Movimenti
 
 ## Test M001 — Carico valido
 
 Risultato atteso:
 
-* RPC `registra_movimento` chiamata;
-* scorta aumentata;
-* movimento creato;
-* messaggio successo.
+* movimento carico registrato;
+* scorta aumentata.
 
 ## Test M002 — Carico senza fornitore
 
 Risultato atteso:
 
-* errore prima dell'invio oppure errore backend tradotto;
-* messaggio chiaro.
+* errore fornitore obbligatorio.
 
 ## Test M003 — Vendita valida
 
 Risultato atteso:
 
-* scorta diminuita;
-* movimento creato.
+* movimento vendita registrato;
+* scorta diminuita.
 
 ## Test M004 — Vendita con scorta insufficiente
 
 Risultato atteso:
 
-* errore chiaro;
-* scorta invariata;
-* nessun movimento creato.
+* errore scorta insufficiente;
+* scorta invariata.
 
 ## Test M005 — Rettifica valida
 
 Risultato atteso:
 
-* scorta impostata correttamente;
-* movimento creato;
-* motivazione presente nelle note.
+* scorta impostata al nuovo valore;
+* movimento registrato.
 
 ## Test M006 — Rettifica senza motivazione
 
 Risultato atteso:
 
-* errore UI;
-* RPC non chiamata.
+* errore o avviso secondo design del blocco movimenti.
 
 ## Test M007 — Storico movimenti
 
 Risultato atteso:
 
-* movimenti leggibili;
-* tipo movimento leggibile;
-* quantità leggibile;
-* scorta prima e dopo leggibili;
-* fornitore leggibile nei carichi.
+* movimento visibile nello storico.
 
 ## Test M008 — Prodotto inattivo non selezionabile
 
 Risultato atteso:
 
-* un prodotto con `attivo = false` non compare nei form di carico;
-* un prodotto con `attivo = false` non compare nei form di vendita;
-* un prodotto con `attivo = false` non compare nei form di rettifica;
-* se si tenta comunque una chiamata non valida, il backend blocca l'operazione;
-* il messaggio mostrato all'utente è chiaro.
+* prodotto inattivo non selezionabile per nuovo movimento.
 
 ---
 
-# 39. Test manuali minimi — Connessione
+# 41. Test manuali minimi — Connessione
 
 ## Test N001 — Assenza rete durante caricamento dati
 
 Risultato atteso:
 
-* l'errore tecnico non viene mostrato grezzo;
-* l'utente riceve un messaggio comprensibile;
-* il messaggio è persistente;
-* il messaggio è leggibile da screen reader.
+* errore comprensibile;
+* possibilità di riprovare quando utile.
 
 ## Test N002 — Assenza rete durante salvataggio
 
 Risultato atteso:
 
-* il salvataggio non viene considerato riuscito;
-* l'utente riceve un messaggio di errore chiaro;
-* nessun messaggio falso di successo viene mostrato;
-* l'utente può riprovare.
+* operazione non completata;
+* messaggio chiaro;
+* nessun dato locale trattato come definitivo.
 
 ---
 
-# 40. Regole di sviluppo operative
+# 42. Regole di sviluppo operative
 
-Durante lo sviluppo Flutter:
+Regole obbligatorie:
 
-* modificare pochi file per volta;
-* testare ogni blocco prima di passare al successivo;
-* non creare file enormi;
-* non duplicare logica;
-* non inserire testi utente dentro i metodi;
-* non usare service role key;
-* non bypassare RLS;
-* non chiamare direttamente insert su movimenti;
-* non aggiornare direttamente scorta;
-* non creare tutto il core in una volta sola;
-* documentare le decisioni importanti;
-* mantenere il codice leggibile anche per revisione manuale.
+* un blocco alla volta;
+* un obiettivo per blocco;
+* niente funzioni future anticipate senza motivo;
+* niente service role key;
+* niente query Supabase dentro widget se evitabile;
+* niente stringhe utente importanti hardcoded;
+* feedback persistente;
+* test automatici quando previsti dal blocco;
+* test manuale quando il blocco coinvolge UI reale;
+* verifica NVDA quando il blocco mostra messaggi o form;
+* `flutter analyze` pulito;
+* `flutter test` pulito;
+* changelog aggiornato prima del commit del blocco.
 
 ---
 
-# 41. Metodo di lavoro consigliato
+# 43. Metodo di lavoro consigliato
 
-Per ogni blocco Flutter si userà questo metodo:
+Per ogni blocco:
+
+1. scrivere design;
+2. farlo eventualmente revisionare dai consiglieri AI;
+3. integrare correzioni;
+4. scrivere coding plan;
+5. scrivere TODO operativo;
+6. preparare prompt rigido per Antigravity;
+7. codificare;
+8. eseguire test automatici;
+9. eseguire test manuali;
+10. correggere;
+11. aggiornare changelog;
+12. commit;
+13. push;
+14. merge in `main` dopo validazione;
+15. verificare `flutter analyze` e `flutter test` su `main`.
+
+---
+
+# 44. Primo blocco dopo questo aggiornamento
+
+Il primo blocco da progettare dopo questo aggiornamento documentale è:
 
 ```text
-1. Mini obiettivo
-2. File da creare o modificare
-3. Codice minimo
-4. Test manuale
-5. Esito PASS/FAIL
-6. Eventuale correzione
-7. Approvazione del blocco
+Blocco 003 — Registrazione account
 ```
 
-Questo metodo è adatto allo sviluppo manuale con VS Code e screen reader.
-
----
-
-# 42. Primo blocco di codice dopo questo documento
-
-Dopo l'approvazione di questo documento, il primo blocco di codice non sarà una schermata completa.
-
-Il primo blocco sarà il core minimo.
-
-Ordine consigliato:
+Documenti previsti:
 
 ```text
-1. verificare struttura attuale lib/
-2. creare cartelle core minime
-3. creare messaggi base
-4. creare errori base
-5. creare feedback persistente semplice
-6. creare accessibilità minima
-7. creare gestione sessione minima
+docs/4-flutter/1-design/003-DESIGN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/2-coding-plans/003-CODING_PLAN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/3-todos/003-TODO_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
 ```
 
-Il primo obiettivo non è costruire subito tutte le funzionalità.
+Il blocco 003 deve creare:
 
-Il primo obiettivo è evitare disordine futuro.
-
----
-
-# 43. Criterio di successo della fase Flutter MVP 1.0
-
-La fase Flutter MVP 1.0 sarà considerata completata quando un utente potrà:
-
-1. aprire l'app;
-2. accedere;
-3. uscire tramite logout;
-4. completare onboarding se necessario;
-5. entrare nella home;
-6. creare e modificare categorie;
-7. creare e modificare fornitori;
-8. creare e modificare prodotti;
-9. registrare carichi;
-10. registrare vendite;
-11. registrare rettifiche;
-12. visualizzare la scorta aggiornata;
-13. consultare lo storico movimenti;
-14. ricevere messaggi chiari;
-15. ricevere errori comprensibili;
-16. gestire errori di connessione senza messaggi tecnici grezzi;
-17. usare il flusso principale con screen reader.
+* schermata o vista registrazione;
+* accesso alla registrazione dalla login;
+* servizio o metodo di registrazione tramite Supabase Auth;
+* validazioni email/password/conferma password;
+* messaggi centralizzati;
+* feedback persistente;
+* annunci accessibili;
+* test automatici;
+* test manuali.
+  Il blocco 003 non deve creare:
+* azienda;
+* profilo applicativo;
+* onboarding reale;
+* home reale;
+* categorie;
+* fornitori;
+* prodotti;
+* movimenti.
 
 ---
 
-# 44. Decisioni confermate
+# 45. Criterio di successo della fase Flutter MVP 1.0
 
-1. Prima core Dart, poi UI.
-2. Nessuna stringa utente hardcoded sparsa.
-3. Sistema centralizzato messaggi.
-4. Sistema centralizzato errori.
-5. Sistema feedback persistente.
-6. Sistema supporto accessibilità.
-7. Non basarsi solo su annunci vocali.
-8. Backend fonte della verità.
-9. Movimenti sempre tramite RPC.
-10. Onboarding tramite RPC.
-11. Nessuna modifica diretta della scorta.
-12. Nessun inserimento diretto dei movimenti.
-13. Sviluppo incrementale.
-14. Accessibilità non rimandata.
-15. Gestione sessione centralizzata.
-16. Navigazione semplice con `Navigator.push` e `Navigator.pop`.
-17. Nessun router esterno obbligatorio nell'MVP 1.
-18. Nessun service locator obbligatorio nell'MVP 1.
-19. Nessun BLoC completo per ogni schermata nell'MVP 1.
-20. Gestione degli errori di rete tramite sistema centralizzato.
-21. Recupero password fuori scope per MVP 1.
-22. Reso implementabile dopo carico, vendita e rettifica.
+La fase Flutter MVP 1.0 sarà considerata riuscita quando:
+
+* un nuovo utente può registrarsi dall'app;
+* un utente può accedere;
+* un utente può completare onboarding;
+* l'utente entra nella home;
+* può creare categorie;
+* può creare fornitori;
+* può creare prodotti;
+* può registrare carichi;
+* può registrare vendite;
+* può registrare rettifiche;
+* può consultare storico movimenti;
+* la scorta viene aggiornata solo tramite backend;
+* gli errori principali sono comprensibili;
+* i feedback sono persistenti;
+* il flusso principale è utilizzabile con screen reader;
+* `flutter analyze` è pulito;
+* `flutter test` è pulito per i test previsti.
 
 ---
 
-# 45. Revisione AI
+# 46. Decisioni confermate
 
-Questo documento è stato preparato da ChatGPT e revisionato concettualmente tramite confronto con:
+Decisioni confermate:
 
-* DeepSeek;
-* Gemini.
-
-Le osservazioni dei revisori sono state integrate.
-
-In particolare sono state aggiunte o rafforzate le sezioni relative a:
-
-* gestione stato e sessione;
-* dipendenze;
-* navigazione;
-* assenza rete;
-* logout;
-* prodotto inattivo nei movimenti;
-* recupero password fuori scope;
-* rischio di sovra-architettura;
-* creazione progressiva del core.
+* core prima delle UI;
+* messaggi centralizzati;
+* feedback persistente;
+* accessibilità non rimandata;
+* backend fonte della verità;
+* Supabase anon key soltanto;
+* service role key vietata in Flutter;
+* nessuna modifica diretta della scorta;
+* movimenti solo tramite RPC `registra_movimento`;
+* onboarding solo tramite RPC `crea_azienda_e_profilo`;
+* registrazione account separata da onboarding azienda/profilo;
+* niente recupero password nell'MVP 1;
+* niente architettura pesante non necessaria;
+* sviluppo per piccoli blocchi;
+* test e commit per ogni blocco importante.
 
 ---
 
-# 46. Stato del documento
+# 47. Revisione AI
+
+La revisione con consiglieri AI è consigliata per:
+
+* design complessi;
+* coding plan critici;
+* modifiche backend;
+* nuove RPC;
+* modifiche RLS;
+* modifiche alla logica di scorta;
+* decisioni importanti su Supabase Auth.
+  La revisione non è normalmente necessaria per:
+* piccoli aggiornamenti organizzativi;
+* README;
+* changelog;
+* correzioni editoriali;
+* todo master semplici.
+  Per il blocco 003 Registrazione account, la revisione con consiglieri AI sarà consigliata dopo la prima bozza del design, perché il blocco riguarda Supabase Auth e il flusso iniziale dell'utente.
+
+---
+
+# 48. Stato del documento
 
 Stato:
 
@@ -1665,25 +1696,48 @@ docs/4-flutter/001-FLUTTER_PLAN_mvp1_v1.0.0.md
 Passo successivo:
 
 ```text
-creazione del core Dart minimo:
-messaggi, errori, feedback, accessibilità, sessione e servizi Supabase di base.
+progettazione del blocco 003 Registrazione account
+```
+
+Documenti da creare dopo questo aggiornamento:
+
+```text
+docs/4-flutter/1-design/003-DESIGN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/2-coding-plans/003-CODING_PLAN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/3-todos/003-TODO_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
 ```
 
 ---
 
-# 47. Conclusione
+# 49. Conclusione
 
-La fase Flutter può iniziare.
-
+La fase Flutter è avviata e procede in modo progressivo.
 Il backend rimane la fonte della verità.
-
 Flutter deve essere costruito in modo ordinato, progressivo e accessibile.
+Il blocco 001 Core Dart minimo è completato.
+Il blocco 002 Login, logout e sessione è completato.
+La decisione aggiornata stabilisce che:
 
-La priorità iniziale non è creare rapidamente schermate complete, ma costruire una base pulita che impedisca:
+* il blocco 003 sarà dedicato alla registrazione account;
+* il blocco 004 sarà dedicato all'onboarding azienda/profilo;
+* il blocco 005 sarà dedicato alla home.
+  Questa separazione serve a mantenere piccoli i blocchi, ridurre il rischio di errori e rendere più semplice il lavoro di implementazione e verifica.
+  La priorità ora non è correre verso le schermate gestionali, ma completare correttamente il flusso iniziale dell'utente:
 
-* stringhe sparse;
-* errori tecnici mostrati all'utente;
-* logica Supabase dentro la UI;
-* feedback non leggibile;
-* accessibilità aggiunta solo alla fine;
-* file troppo grandi e difficili da mantenere.
+```text
+registrazione
+↓
+login
+↓
+onboarding
+↓
+home
+```
+
+Solo dopo questo flusso sarà stabile, si passerà alle funzioni gestionali:
+
+* categorie;
+* fornitori;
+* prodotti;
+* movimenti;
+* storico movimenti.

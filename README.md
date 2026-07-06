@@ -4,6 +4,7 @@ Gestionale magazzino sviluppato con Flutter, Dart e Supabase.
 Il progetto nasce con l'obiettivo di costruire un gestionale semplice, solido, accessibile e adattabile a diversi settori commerciali.
 L'MVP 1 si concentra sul cuore del sistema:
 
+* registrazione account;
 * autenticazione utente;
 * creazione azienda e profilo;
 * gestione categorie;
@@ -20,7 +21,7 @@ L'MVP 1 si concentra sul cuore del sistema:
 
 Stato attuale:
 
-```text id="j6ykip"
+```text
 MVP 1 in sviluppo
 ```
 
@@ -48,8 +49,13 @@ Sono già stati completati:
 * design auth/session Flutter;
 * coding plan auth/session Flutter;
 * TODO auth/session Flutter;
-* aggiornamento del todo master dopo la preparazione documentale del blocco auth/session;
-* aggiornamento del changelog dopo la preparazione documentale del blocco auth/session.
+* codifica del blocco 002 Auth/Session;
+* test automatici del blocco 002 Auth/Session;
+* test manuali login/logout/sessione;
+* correzione accessibilità feedback NVDA;
+* commit, push e merge del blocco 002 Auth/Session in `main`;
+* aggiornamento del todo master con la nuova sequenza Flutter;
+* aggiornamento del Flutter plan con la decisione registrazione separata da onboarding.
   Il blocco 001 Core Dart minimo è completato.
   Il blocco 001 ha introdotto:
 * messaggi centralizzati;
@@ -61,18 +67,74 @@ Sono già stati completati:
 * stato sessione minimo;
 * controller sessione minimo;
 * test automatici obbligatori del core.
-  Dopo il merge del blocco 001 in `main`, risultano superati:
+  Il blocco 002 Auth/Session è completato.
+  Il blocco 002 ha introdotto:
+* controllo sessione Supabase all'avvio;
+* login con email e password;
+* logout;
+* recupero sessione persistente;
+* ascolto centrale degli eventi auth Supabase;
+* lettura profilo applicativo;
+* lettura azienda collegata al profilo;
+* distinzione tra profilo assente, profilo incompleto ed errore tecnico;
+* placeholder onboarding;
+* placeholder home;
+* feedback persistente;
+* annunci accessibili dei feedback principali;
+* test automatici obbligatori del blocco;
+* test manuali con Supabase reale;
+* verifica NVDA sui messaggi principali.
+  Dopo il merge del blocco 002 in `main`, risultano superati:
 
-```text id="c6wqg7"
+```text
 flutter analyze
 flutter test
 ```
 
-La preparazione documentale del blocco 002 Auth/Session è completata.
-La fase attuale riguarda la preparazione del prompt operativo rigido per Antigravity e la successiva codifica del blocco 002:
+La prossima fase riguarda la progettazione del blocco 003:
 
-```text id="q77fsg"
-Login, logout e sessione
+```text
+Registrazione account
+```
+
+---
+
+# Decisione organizzativa attuale
+
+Durante la validazione del blocco 002 è emerso che l'app permette il login di utenti già esistenti, ma non permette ancora a un nuovo utente di registrarsi dall'app.
+Per l'MVP 1 questa possibilità è necessaria.
+Un utente finale non deve entrare in Supabase, creare utenti manualmente, resettare password o lanciare query SQL.
+Decisione:
+
+```text
+la registrazione account viene separata dall'onboarding azienda/profilo
+```
+
+Significato:
+
+* registrazione account = crea l'utente Supabase Auth;
+* onboarding = crea azienda e profilo applicativo tramite RPC `crea_azienda_e_profilo`.
+  Nuova sequenza ufficiale:
+
+```text
+002 Login, logout e sessione
+003 Registrazione account
+004 Onboarding azienda/profilo
+005 Home
+006 Categorie
+007 Fornitori
+008 Prodotti
+009 Movimenti di magazzino
+010 Storico movimenti
+011 Revisione accessibilità
+012 Stabilizzazione MVP 1
+```
+
+Regola pratica:
+
+```text
+il blocco 003 non crea azienda e profilo
+il blocco 004 non crea l'account Supabase Auth
 ```
 
 ---
@@ -81,17 +143,20 @@ Login, logout e sessione
 
 L'MVP 1 deve permettere a un utente di:
 
-1. accedere al sistema;
-2. completare l'onboarding iniziale;
-3. creare categorie;
-4. creare fornitori;
-5. creare prodotti;
-6. registrare carichi;
-7. registrare vendite;
-8. registrare rettifiche;
-9. visualizzare la scorta aggiornata;
-10. consultare lo storico dei movimenti;
-11. usare il flusso principale tramite screen reader.
+1. registrare un nuovo account dall'app;
+2. accedere al sistema;
+3. completare l'onboarding iniziale;
+4. creare azienda e profilo applicativo;
+5. entrare nella home aziendale;
+6. creare categorie;
+7. creare fornitori;
+8. creare prodotti;
+9. registrare carichi;
+10. registrare vendite;
+11. registrare rettifiche;
+12. visualizzare la scorta aggiornata;
+13. consultare lo storico dei movimenti;
+14. usare il flusso principale tramite screen reader.
     L'MVP 1 non ha l'obiettivo di essere un gestionale completo e definitivo.
     Ha l'obiettivo di validare il nucleo affidabile del progetto.
 
@@ -101,23 +166,24 @@ L'MVP 1 deve permettere a un utente di:
 
 ## Frontend
 
-```text id="eh0w9f"
+```text
 Flutter
 Dart
 ```
 
 Il frontend viene costruito in modo progressivo.
-La prima base Flutter, cioè il core Dart minimo, è stata completata.
+La base Flutter, cioè il core Dart minimo, è stata completata.
+Il blocco Auth/Session è stato completato.
 Le schermate e le funzionalità applicative vengono costruite per blocchi successivi.
-Il blocco attuale da codificare è:
+Il prossimo blocco da progettare è:
 
-```text id="ay4f59"
-Login, logout e sessione
+```text
+Registrazione account
 ```
 
 ## Backend
 
-```text id="um4lrv"
+```text
 Supabase
 PostgreSQL
 Supabase Auth
@@ -135,11 +201,9 @@ La scorta di un prodotto non deve mai essere modificata direttamente dal fronten
 Ogni variazione deve passare da un movimento di magazzino.
 La modifica della scorta avviene tramite la RPC:
 
-```text id="hlqaui"
+```text
 registra_movimento
 ```
-
----
 
 ## 2. I movimenti sono lo storico ufficiale
 
@@ -150,8 +214,6 @@ I movimenti:
 * non vengono modificati;
 * non vengono eliminati.
   Eventuali errori devono essere corretti con nuovi movimenti.
-
----
 
 ## 3. Backend fonte della verità
 
@@ -174,14 +236,12 @@ Flutter deve:
 * bypassare le RLS;
 * fidarsi dei dati locali come fonte definitiva.
 
----
-
 ## 4. Multi-tenant
 
 Ogni dato appartiene a una azienda.
 La relazione principale è:
 
-```text id="sp1689"
+```text
 auth.users
 ↓
 profili
@@ -193,7 +253,6 @@ dati aziendali
 
 Ogni utente può accedere solo ai dati della propria azienda.
 Le RLS sono obbligatorie.
--------------------------
 
 ## 5. Accessibilità obbligatoria
 
@@ -216,7 +275,7 @@ Il progetto deve prevedere:
 
 Struttura principale:
 
-```text id="euw8q2"
+```text
 Gestionale-magazzino/
   README.md
   CHANGELOG.md
@@ -230,7 +289,7 @@ Gestionale-magazzino/
 
 Percorso:
 
-```text id="fxmtdm"
+```text
 app/
 ```
 
@@ -252,7 +311,7 @@ Al suo interno si trovano o si troveranno:
 * test Flutter.
   Il file:
 
-```text id="lavhkt"
+```text
 app/README.md
 ```
 
@@ -265,21 +324,21 @@ Il README principale del progetto è questo file nella root del repository.
 
 Percorso:
 
-```text id="e9wv5f"
+```text
 docs/
 ```
 
 Contiene la documentazione ufficiale del progetto.
 Il file:
 
-```text id="vwe9vh"
+```text
 docs/README.md
 ```
 
 è l'indice della documentazione tecnica e progettuale.
 Per capire dove si trovano i documenti, partire da:
 
-```text id="vi2tes"
+```text
 docs/README.md
 ```
 
@@ -289,7 +348,7 @@ docs/README.md
 
 I documenti principali del progetto sono:
 
-```text id="wh2y5m"
+```text
 docs/0-architettura/001-ARCHITETTURA_mvp1_v1.0.0.md
 docs/1-database/001-DATABASE_SCHEMA_mvp1_v1.0.0.md
 docs/1-database/TEST_PLAN_MVP1_v1.0.0.md
@@ -298,7 +357,7 @@ docs/3-backend/001-BACKEND_RULES_mvp1_v1.0.0.md
 docs/3-backend/002-API_CONTRACTS_mvp1_v1.0.0.md
 docs/4-flutter/001-FLUTTER_PLAN_mvp1_v1.0.0.md
 docs/4-flutter/1-design/001-DESIGN_CORE_mvp1_v1.0.0.md
-docs/4-flutter/2-coding-plans/001-CODING_PLAN_CORE_mvp1_v1.0.0.md
+docs/4-flutter/2-coding-plans/001_CODING_PLAN_CORE_mvp1_v1.0.0.md
 docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md
 docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md
 docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md
@@ -306,13 +365,24 @@ docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md
 docs/4-flutter/3-todos/000-todo-master.md
 ```
 
----
+Documenti previsti per il prossimo blocco:
+
+```text
+docs/4-flutter/1-design/003-DESIGN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/2-coding-plans/003-CODING_PLAN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/3-todos/003-TODO_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+```
+
+Nota:
+i documenti del blocco 003 non sono ancora creati.
+Saranno il prossimo lavoro documentale.
+---------------------------------------
 
 # Script Supabase
 
 Gli script SQL principali sono:
 
-```text id="jc31ro"
+```text
 docs/1-database/supabase/001_schema.sql
 docs/1-database/supabase/002_rpc.sql
 docs/1-database/supabase/003_rls.sql
@@ -334,7 +404,7 @@ Definisce:
 
 Definisce la RPC:
 
-```text id="kk118m"
+```text
 registra_movimento
 ```
 
@@ -354,7 +424,7 @@ Garantisce che ogni utente possa accedere solo ai dati della propria azienda.
 
 Definisce la RPC:
 
-```text id="8v0pav"
+```text
 crea_azienda_e_profilo
 ```
 
@@ -362,14 +432,14 @@ crea_azienda_e_profilo
 
 # Flusso principale MVP 1
 
-Il flusso principale previsto è:
+Il flusso principale previsto per un nuovo utente è:
 
-```text id="c27dzj"
-Login
+```text
+Registrazione account
 ↓
-Controllo sessione
+Login o sessione autenticata
 ↓
-Onboarding se necessario
+Onboarding azienda/profilo
 ↓
 Home
 ↓
@@ -386,13 +456,27 @@ Visualizzazione scorta
 Storico movimenti
 ```
 
+Il flusso principale previsto per un utente già esistente è:
+
+```text
+Login
+↓
+Controllo sessione
+↓
+Onboarding se necessario
+↓
+Home
+↓
+Funzioni gestionali
+```
+
 ---
 
 # Tipi di movimento
 
 L'MVP 1 prevede questi tipi di movimento:
 
-```text id="zx0821"
+```text
 carico
 vendita
 reso
@@ -450,12 +534,20 @@ Sono stati testati:
 La fase Flutter è in sviluppo progressivo.
 Il progetto Flutter è presente nella cartella:
 
-```text id="fo1g9j"
+```text
 app/
 ```
 
 Il piano Flutter approvato stabilisce che il lavoro non deve partire dalle schermate complete, ma da una base comune.
-Il primo blocco Flutter, cioè il core Dart minimo, è completato.
+
+## Blocco 001 — Core Dart minimo
+
+Stato:
+
+```text
+COMPLETATO
+```
+
 Il core Dart minimo ha preparato:
 
 * messaggi centralizzati;
@@ -469,20 +561,22 @@ Il core Dart minimo ha preparato:
 * test automatici obbligatori.
   Il blocco core è stato verificato con:
 
-```text id="j0irog"
+```text
 flutter analyze
 flutter test
 ```
 
 entrambi con esito positivo.
-La documentazione del secondo blocco Flutter è completata.
-Il secondo blocco Flutter riguarda:
 
-```text id="wfha4v"
-Login, logout e sessione
+## Blocco 002 — Login, logout e sessione
+
+Stato:
+
+```text
+COMPLETATO
 ```
 
-Il blocco 002 dovrà implementare:
+Il blocco 002 ha implementato:
 
 * controllo sessione Supabase all'avvio;
 * login con email e password;
@@ -497,11 +591,44 @@ Il blocco 002 dovrà implementare:
 * placeholder home;
 * feedback persistente;
 * accessibilità minima;
+* annunci NVDA dei feedback principali;
 * test automatici obbligatori;
 * test manuali con Supabase reale.
-  Il blocco 002 non dovrà implementare:
-* registrazione nuovo utente;
-* recupero password;
+  Il blocco 002 è stato verificato con:
+
+```text
+flutter analyze
+flutter test
+```
+
+entrambi con esito positivo.
+Il blocco 002 è stato committato, pushato e mergiato in `main`.
+
+## Blocco 003 — Registrazione account
+
+Stato:
+
+```text
+DA PROGETTARE
+```
+
+Il blocco 003 dovrà implementare:
+
+* accesso alla registrazione dalla login;
+* schermata registrazione;
+* email;
+* password;
+* conferma password;
+* creazione account tramite Supabase Auth;
+* gestione email già registrata;
+* gestione password non valida;
+* feedback persistente;
+* annunci accessibili;
+* test automatici;
+* test manuali con Supabase reale.
+  Il blocco 003 non dovrà implementare:
+* creazione azienda;
+* creazione profilo applicativo;
 * onboarding reale;
 * home reale;
 * categorie;
@@ -510,7 +637,30 @@ Il blocco 002 dovrà implementare:
 * movimenti;
 * storico movimenti.
 
----
+## Blocco 004 — Onboarding azienda/profilo
+
+Stato:
+
+```text
+DA FARE
+```
+
+Il blocco 004 sostituirà il placeholder onboarding con onboarding reale.
+Dovrà usare la RPC:
+
+```text
+crea_azienda_e_profilo
+```
+
+## Blocco 005 — Home
+
+Stato:
+
+```text
+DA FARE
+```
+
+## Il blocco 005 sostituirà il placeholder home con la home reale.
 
 # Metodo di lavoro
 
@@ -526,10 +676,12 @@ Per ogni blocco importante:
 7. si corregge;
 8. si aggiorna il changelog;
 9. si esegue commit;
-10. si esegue push.
+10. si esegue push;
+11. si esegue merge in `main` dopo validazione;
+12. si verifica `flutter analyze` e `flutter test` su `main`.
     Regola sintetica:
 
-```text id="fyvuj2"
+```text
 un blocco, un obiettivo, un test, un commit
 ```
 
@@ -537,31 +689,31 @@ un blocco, un obiettivo, un test, un commit
 
 # Prossimo passo
 
-Il prossimo passo operativo è preparare il prompt rigido per Antigravity relativo al blocco:
+Il prossimo passo operativo è progettare il blocco:
 
-```text id="cqfvie"
-Login, logout e sessione
+```text
+003 — Registrazione account
 ```
 
-La codifica dovrà seguire i documenti approvati:
+Prima della codifica dovranno essere creati:
 
-```text id="h02tq2"
-docs/4-flutter/1-design/002-DESIGN_AUTH_SESSION_mvp1_v1.0.0.md
-docs/4-flutter/2-coding-plans/002-CODING_PLAN_AUTH_SESSION_mvp1_v1.0.0.md
-docs/4-flutter/3-todos/002-TODO_AUTH_SESSION_mvp1_v1.0.0.md
+```text
+docs/4-flutter/1-design/003-DESIGN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/2-coding-plans/003-CODING_PLAN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
+docs/4-flutter/3-todos/003-TODO_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md
 ```
 
-Il blocco dovrà creare i file di produzione e i test automatici previsti dal TODO auth/session.
-Il blocco non sarà completato senza:
+Il blocco 003 dovrà concentrarsi solo su:
 
-```text id="d5syr7"
-flutter analyze
-flutter test
-```
-
-entrambi con esito positivo.
-Non si devono ancora creare:
-
+* registrazione account Supabase Auth;
+* validazione form;
+* feedback persistente;
+* accessibilità;
+* test automatici;
+* test manuali reali.
+  Il blocco 003 non dovrà creare:
+* azienda;
+* profilo applicativo;
 * onboarding reale;
 * home reale;
 * categorie;
@@ -576,7 +728,7 @@ Non si devono ancora creare:
 
 Non inserire mai nel codice Flutter:
 
-```text id="vgclax"
+```text
 service role key
 ```
 
@@ -587,19 +739,19 @@ Le regole di sicurezza devono essere garantite da:
 * RLS;
 * RPC;
 * controlli server-side.
-  Nel blocco 002 Auth/Session, Flutter non deve chiamare:
+  Nel blocco 003 Registrazione account, Flutter non deve chiamare:
 
-```text id="tbcqch"
+```text
 crea_azienda_e_profilo
 ```
 
-Questa RPC appartiene al blocco onboarding.
-Nel blocco 002 Auth/Session, Flutter deve solo:
+Questa RPC appartiene al blocco 004 Onboarding azienda/profilo.
+Nel blocco 003 Registrazione account, Flutter deve solo:
 
-* autenticare l'utente;
-* leggere il profilo;
-* leggere l'azienda collegata;
-* decidere se mostrare login, placeholder onboarding o placeholder home.
+* creare l'utente Supabase Auth;
+* gestire validazioni e messaggi;
+* mantenere accessibilità;
+* preparare il passaggio logico verso onboarding, senza creare ancora azienda e profilo.
 
 ---
 
@@ -615,16 +767,16 @@ Ogni schermata dovrà rispettare questi principi:
 * nessuna funzione critica solo tramite icona;
 * nessuna informazione importante solo tramite colore;
 * compatibilità con screen reader.
-  Per il blocco 002 Auth/Session sono particolarmente importanti:
+  Per il blocco 003 Registrazione account saranno particolarmente importanti:
+* link o pulsante Crea account leggibile;
 * campo Email con etichetta chiara;
 * campo Password con etichetta chiara;
-* pulsante Accedi leggibile;
-* pulsante Esci leggibile;
-* pulsante Riprova leggibile;
+* campo Conferma password con etichetta chiara;
+* pulsante Registrati leggibile;
+* pulsante Torna al login leggibile;
 * messaggi di errore persistenti;
-* caricamento sessione leggibile;
-* placeholder onboarding leggibile;
-* placeholder home leggibile.
+* messaggi di successo persistenti;
+* annunci NVDA dei feedback principali.
   La revisione finale di accessibilità servirà a controllare l'intero flusso, non ad aggiungere accessibilità alla fine.
 
 ---
@@ -675,7 +827,7 @@ Immagini prodotto.
 
 Il file:
 
-```text id="vqk7br"
+```text
 CHANGELOG.md
 ```
 
@@ -684,8 +836,10 @@ Dopo ogni blocco importante, il changelog deve essere aggiornato.
 Il changelog è già stato aggiornato per registrare:
 
 * completamento del core Dart minimo;
-* preparazione documentale del blocco auth/session.
-  Dovrà essere aggiornato nuovamente dopo la codifica effettiva del blocco auth/session.
+* preparazione documentale del blocco auth/session;
+* completamento della codifica Auth/Session;
+* correzione accessibilità feedback NVDA del blocco Auth/Session.
+  Dovrà essere aggiornato nuovamente dopo l'aggiornamento documentale che separa registrazione account e onboarding, se questa modifica viene committata come blocco documentale.
 
 ---
 
@@ -694,18 +848,21 @@ Il changelog è già stato aggiornato per registrare:
 I commit devono essere chiari.
 Esempi corretti:
 
-```text id="qij9lg"
+```text
 Aggiunge README principale del progetto
 Aggiunge design core Flutter
 Aggiunge coding plan core Flutter
 Aggiunge core messaggi ed errori
 Aggiunge TODO auth session Flutter
 Aggiunge login logout e gestione sessione
+Aggiorna piano Flutter con registrazione separata
+Aggiunge design registrazione account
+Aggiunge registrazione account
 ```
 
 Esempi da evitare:
 
-```text id="vsurq1"
+```text
 modifiche
 fix
 aggiornamento
@@ -725,8 +882,8 @@ Per riprendere il lavoro:
 5. seguire il prossimo passo indicato.
    In questo momento il prossimo passo indicato è:
 
-```text id="btiq5b"
-preparare il prompt operativo rigido per Antigravity sul blocco 002 Auth/Session
+```text
+progettare il blocco 003 Registrazione account
 ```
 
 ---
@@ -749,15 +906,16 @@ Serve a capire:
 * quale lavoro viene dopo.
   Stato attuale sintetico:
 
-```text id="93st70"
+```text
 Backend validato.
 Core Dart minimo completato.
-Documentazione Auth/Session completata.
-Prossimo passo: prompt Antigravity e codifica blocco 002.
+Auth/Session completato e mergiato in main.
+Decisione registrazione account separata da onboarding documentata.
+Prossimo passo: design del blocco 003 Registrazione account.
 ```
 
 Per i dettagli tecnici completi, consultare la cartella:
 
-```text id="xj1g0m"
+```text
 docs/
 ```

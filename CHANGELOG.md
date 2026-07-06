@@ -23,6 +23,49 @@ Regola generale:
 
 ---
 
+## [0.5.1] - 2026-07-06
+
+### Aggiunto
+
+* Documentata la decisione organizzativa di separare la registrazione account dall'onboarding azienda/profilo.
+* Aggiunta la nuova sequenza ufficiale dei blocchi Flutter:
+
+  * blocco 002: Login, logout e sessione;
+  * blocco 003: Registrazione account;
+  * blocco 004: Onboarding azienda/profilo;
+  * blocco 005: Home;
+  * blocchi successivi scalati di conseguenza.
+* Aggiunta nei documenti la regola secondo cui la registrazione account crea solo l'utente Supabase Auth.
+* Aggiunta nei documenti la regola secondo cui l'onboarding crea azienda e profilo applicativo tramite RPC `crea_azienda_e_profilo`.
+* Aggiunta nei documenti la regola secondo cui il blocco 003 non deve creare azienda, profilo, onboarding reale o home reale.
+* Aggiunta nei documenti la regola secondo cui il blocco 004 non deve creare l'account Supabase Auth.
+* Aggiunta la previsione dei documenti del nuovo blocco 003:
+
+  * `docs/4-flutter/1-design/003-DESIGN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md`;
+  * `docs/4-flutter/2-coding-plans/003-CODING_PLAN_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md`;
+  * `docs/4-flutter/3-todos/003-TODO_ACCOUNT_REGISTRATION_mvp1_v1.0.0.md`.
+
+### Modificato
+
+* Aggiornato `docs/4-flutter/3-todos/000-todo-master.md` con lo stato reale del progetto dopo il completamento del blocco 002.
+* Aggiornato `docs/4-flutter/3-todos/000-todo-master.md` per segnare il blocco 002 Auth/Session come completato, testato, committato, pushato e mergiato in `main`.
+* Aggiornato `docs/4-flutter/3-todos/000-todo-master.md` per inserire il nuovo blocco 003 Registrazione account e spostare l'onboarding al blocco 004.
+* Aggiornato `docs/4-flutter/001-FLUTTER_PLAN_mvp1_v1.0.0.md` con la decisione D07: Registrazione account separata da onboarding.
+* Aggiornato `README.md` principale del repository con lo stato reale del progetto, il completamento del blocco 002 e il nuovo prossimo passo sul blocco 003.
+* Aggiornato `docs/README.md` con la nuova sequenza Flutter e con il nuovo ordine dei documenti futuri.
+* Aggiornati i riferimenti al prossimo passo operativo, sostituendo il vecchio riferimento al blocco 002 con il nuovo riferimento al design del blocco 003 Registrazione account.
+
+### Note
+
+* Questa versione non introduce codice Dart nuovo.
+* Questa versione non modifica SQL, RLS o RPC.
+* Questa versione non modifica il backend.
+* Questa versione serve a rendere coerente la documentazione ufficiale dopo il completamento del blocco 002.
+* La scelta di separare registrazione account e onboarding riduce il rischio di blocchi troppo grandi e rende più semplice isolare eventuali problemi futuri.
+* Il prossimo passo operativo sarà scrivere il design del blocco 003 Registrazione account.
+
+---
+
 ## [0.5.0] - 2026-07-06
 
 ### Aggiunto
@@ -44,6 +87,32 @@ Regola generale:
 
 * Aggiornato `main.dart` per inizializzare il flusso corretto con il coordinator auth e caricare `AppRoot`.
 * Aggiornato `app_messages.dart` con i messaggi mancanti necessari al blocco 002.
+* Aggiornato il blocco 002 dopo test manuali con NVDA per migliorare gli annunci accessibili dei feedback principali.
+* Aggiornato il comportamento dei feedback di validazione locale nella pagina login.
+* Aggiornato il comportamento dei feedback di successo e transizione nel coordinator auth/session.
+
+### Verificato
+
+* Verificato `flutter analyze` con esito positivo.
+* Verificato `flutter test` con tutti i test superati.
+* Verificato login reale con utenti Supabase di test.
+* Verificato logout reale.
+* Verificato recupero sessione e ritorno alla schermata login dopo logout.
+* Verificati messaggi di errore per credenziali errate.
+* Verificati messaggi di validazione per campi vuoti.
+* Verificati annunci NVDA dei feedback principali.
+* Verificato merge del blocco 002 in `main`.
+* Verificati `flutter analyze` e `flutter test` puliti anche dopo il merge in `main`.
+
+### Note
+
+* Il blocco 002 implementa login, logout, sessione, lettura profilo, lettura azienda e scelta tra login, placeholder onboarding e placeholder home.
+* Il blocco 002 non implementa registrazione nuovo utente.
+* Il blocco 002 non implementa onboarding reale.
+* Il blocco 002 non implementa home reale.
+* Il blocco 002 non implementa categorie, fornitori, prodotti, movimenti o storico.
+
+---
 
 ## [0.4.0] - 2026-07-06
 
@@ -155,6 +224,8 @@ Regola generale:
 * Il blocco auth/session non potrà essere considerato completato senza `flutter analyze` e `flutter test` entrambi con esito positivo.
 * Prima del commit finale della codifica auth/session dovrà essere aggiornato nuovamente questo changelog con il risultato effettivo dell'implementazione.
 
+---
+
 ## [0.3.0] - 2026-07-05
 
 ### Aggiunto
@@ -172,6 +243,8 @@ Regola generale:
 * Il blocco core non introduce schermate complete.
 * Il blocco core non implementa login, onboarding, prodotti o movimenti.
 * Il blocco core è completabile solo con `flutter analyze` e `flutter test` entrambi con esito positivo.
+
+---
 
 ## [0.2.0] - 2026-07-05
 
@@ -223,6 +296,8 @@ Regola generale:
   * `docs/4-flutter/3-todos/001-TODO_CORE_mvp1_v1.0.0.md`.
 * Il blocco core dovrà creare otto file di produzione e quattro file di test automatici obbligatori.
 * Il blocco core non dovrà creare schermate complete.
+
+---
 
 ## [0.1.0] - 2026-07-04
 
